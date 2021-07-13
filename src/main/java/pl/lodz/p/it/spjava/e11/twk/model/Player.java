@@ -1,0 +1,139 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pl.lodz.p.it.spjava.e11.twk.model;
+
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+/**
+ *
+ * @author Adam
+ */
+@Entity
+@Table(name = "PLAYER")
+@NamedQueries({
+    @NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p"),
+    @NamedQuery(name = "Player.findById", query = "SELECT p FROM Player p WHERE p.id = :id"),
+    @NamedQuery(name = "Player.findByVer", query = "SELECT p FROM Player p WHERE p.ver = :ver"),
+    @NamedQuery(name = "Player.findByNick", query = "SELECT p FROM Player p WHERE p.nick = :nick"),
+    @NamedQuery(name = "Player.findByGameClub", query = "SELECT p FROM Player p WHERE p.gameClub = :gameClub")})
+public class Player implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "ver")
+    private BigInteger ver;
+    @Size(max = 64)
+    @Column(name = "nick")
+    private String nick;
+    @Size(max = 64)
+    @Column(name = "game_club")
+    private String gameClub;
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @ManyToOne
+    private Account accountId;
+    @OneToMany(mappedBy = "playerId")
+    private List<TParticipant> tParticipantList;
+
+    public Player() {
+    }
+
+    public Player(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigInteger getVer() {
+        return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public String getGameClub() {
+        return gameClub;
+    }
+
+    public void setGameClub(String gameClub) {
+        this.gameClub = gameClub;
+    }
+
+    public Account getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Account accountId) {
+        this.accountId = accountId;
+    }
+
+    public List<TParticipant> getTParticipantList() {
+        return tParticipantList;
+    }
+
+    public void setTParticipantList(List<TParticipant> tParticipantList) {
+        this.tParticipantList = tParticipantList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Player)) {
+            return false;
+        }
+        Player other = (Player) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "pl.lodz.p.it.spjava.e11.twk.model.Player[ id=" + id + " ]";
+    }
+    
+}

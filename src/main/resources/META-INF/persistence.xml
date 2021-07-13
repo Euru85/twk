@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="pl.lodz.p.it.spjava.e11_TabletopWargamesKeeper_war_0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Administrator</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.TParticipant</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Army</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.League</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Organizator</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.AccountData</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.TGame</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Account</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.TRound</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Player</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.GameSystem</class>
+    <class>pl.lodz.p.it.spjava.e11.twk.model.Tournament</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/mysql"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="adam123"/>
+    </properties>
+  </persistence-unit>
+</persistence>
