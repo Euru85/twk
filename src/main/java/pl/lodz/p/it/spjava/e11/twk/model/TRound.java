@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -41,6 +42,7 @@ public class TRound implements Serializable {
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
     @Column(name = "closed")
     private Boolean closed;
@@ -67,10 +69,6 @@ public class TRound implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public Boolean getClosed() {

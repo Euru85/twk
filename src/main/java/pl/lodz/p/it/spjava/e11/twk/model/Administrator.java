@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -35,9 +36,10 @@ public class Administrator implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
     private Long id;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne
@@ -60,10 +62,6 @@ public class Administrator implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public Account getAccountId() {

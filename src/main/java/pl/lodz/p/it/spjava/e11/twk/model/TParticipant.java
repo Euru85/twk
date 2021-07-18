@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -40,6 +41,7 @@ public class TParticipant implements Serializable {
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
     @OneToMany(mappedBy = "participantId")
     private List<Tournament> tournamentList;
@@ -76,10 +78,6 @@ public class TParticipant implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
 /**
@@ -45,11 +46,15 @@ public class Tournament implements Serializable {
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
+    @Size(max = 2000)
+    @Column(name = "tournament_name",nullable = false, updatable = true)
+    private String tournamentName;
     @Size(max = 2000)
     @Column(name = "description")
     private String description;
-    @Column(name = "closed")
+    @Column(name = "closed",nullable = false, updatable = true)
     private Boolean closed;
     @Column(name = "rounds")
     private Integer rounds;
@@ -90,10 +95,6 @@ public class Tournament implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public String getDescription() {

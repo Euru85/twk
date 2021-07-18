@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
 /**
@@ -38,12 +39,13 @@ public class AccountData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id",unique = true, nullable = false, updatable = false)
     private Long id;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
     @Size(max = 64)
-    @Column(name = "acoount_name")
+    @Column(name = "acoount_name", nullable = false)
     private String acoountName;
     @Size(max = 64)
     @Column(name = "surname")
@@ -69,10 +71,6 @@ public class AccountData implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public String getAcoountName() {

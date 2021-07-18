@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.Size;
 
 /**
@@ -42,14 +43,15 @@ public class Account implements Serializable {
     @Column(name = "id")
     private Long id;
     @Size(max = 255)
-    @Column(name = "login")
+    @Column(name = "login", unique = true, nullable = false, updatable = false)
     private String login;
     @Column(name = "ver")
+    @Version
     private BigInteger ver;
     @Size(max = 64)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, updatable = false)
     private String password;
-    @Column(name = "active")
+    @Column(name = "active", nullable = false)
     private Boolean active;
     @OneToMany(mappedBy = "lastModifiedById")
     private List<Tournament> tournamentList;
@@ -87,10 +89,6 @@ public class Account implements Serializable {
 
     public BigInteger getVer() {
         return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public String getPassword() {
