@@ -34,13 +34,13 @@ public class TExtraPoints implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @JoinColumn(name = "participant_id", referencedColumnName = "id")
     @ManyToOne
     private TParticipant participantId;
@@ -60,7 +60,7 @@ public class TExtraPoints implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

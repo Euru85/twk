@@ -42,7 +42,7 @@ public class Army implements Serializable {
     private Long id;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @Size(max = 100)
     @Column(name = "army_name",unique = true, nullable = false, updatable = false)
     private String armyName;
@@ -64,7 +64,7 @@ public class Army implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

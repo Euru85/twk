@@ -34,13 +34,13 @@ public class Administrator implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     private Long id;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     @ManyToOne
     private Account accountId;
@@ -60,7 +60,7 @@ public class Administrator implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

@@ -41,13 +41,13 @@ public class Tournament implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @Size(max = 2000)
     @Column(name = "tournament_name",nullable = false, updatable = true)
     private String tournamentName;
@@ -93,7 +93,7 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

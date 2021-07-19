@@ -36,7 +36,7 @@ public class GameSystem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -45,7 +45,7 @@ public class GameSystem implements Serializable {
     private String systemName;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @OneToMany(mappedBy = "gameSystemId")
     private List<Tournament> tournamentList;
     @OneToMany(mappedBy = "gameSystemId")
@@ -74,7 +74,7 @@ public class GameSystem implements Serializable {
         this.systemName = systemName;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

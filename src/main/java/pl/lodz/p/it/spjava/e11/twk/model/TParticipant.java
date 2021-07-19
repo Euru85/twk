@@ -36,13 +36,13 @@ public class TParticipant implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @OneToMany(mappedBy = "participantId")
     private List<Tournament> tournamentList;
     @OneToMany(mappedBy = "playerA")
@@ -76,7 +76,7 @@ public class TParticipant implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 

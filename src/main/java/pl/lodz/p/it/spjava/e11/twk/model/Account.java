@@ -38,7 +38,7 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -47,7 +47,7 @@ public class Account implements Serializable {
     private String login;
     @Column(name = "ver")
     @Version
-    private BigInteger ver;
+    private Long ver;
     @Size(max = 64)
     @Column(name = "password", nullable = false, updatable = false)
     private String password;
@@ -87,7 +87,7 @@ public class Account implements Serializable {
         this.login = login;
     }
 
-    public BigInteger getVer() {
+    public Long getVer() {
         return ver;
     }
 
