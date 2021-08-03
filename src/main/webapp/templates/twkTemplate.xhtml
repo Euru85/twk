@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Tabletop Wargamer Keeper</title>
+        <meta name="author" content="Adam Gajak"></meta>
+    </h:head>
+    <h:body style="padding: 30px;">
+        <b:container>
+            <ui:insert name="menuBar">
+                <b:navBar brand="${msg['app.name']}" brandHref="#" inverse="true">
+                    <b:navbarLinks>
+                        <b:navLink value="${msg['main.page']}" outcome="goToMainPage"></b:navLink>
+                        <b:navLink value="${msg['menu.leagues']}" outcome="goToLeagues"></b:navLink>
+                        <b:navLink value="${msg['menu.tournaments']}" outcome="goToTournaments"></b:navLink>
+                        <b:navLink value="${msg['menu.players']}"  outcome="goToPlayers"></b:navLink>
+                        <b:dropMenu value="${msg['menu.admin_panel']}" rendered="#{request.isUserInRole('Administrator')}">
+                            <b:navLink value="${msg['menu.accounts']}" outcome="goToAccounts"></b:navLink>
+                            <b:navLink value="${msg['menu.tournaments']}" outcome="goToTournaments"></b:navLink>
+                            <b:navLink value="${msg['menu.systems']}" outcome="goToTournaments"></b:navLink>
+                            <b:navLink value="${msg['menu.leagues']}" outcome="goToLeagues"></b:navLink>
+                        </b:dropMenu>
+                    </b:navbarLinks>
+                    <b:navbarLinks pull="right">
+                        <b:dropMenu value="PL">
+                            <b:navLink value="PL" href="#"></b:navLink>
+                            <b:navLink value="EN" href="#"></b:navLink>
+                        </b:dropMenu>
+                        <b:navLink value="${msg['menu.register']}" outcome="goToRegister" rendered="#{empty request.remoteUser}"></b:navLink>
+                        <b:dropMenu value="${msg['menu.account']}" rendered="#{not empty request.remoteUser}">
+                            <b:navLink value="${msg['menu.accounts.changePassword']}" outcome="goToRegister" rendered="#{empty request.remoteUser}"></b:navLink>
+                            <b:navLink value="${msg['menu.accounts.details']}" outcome="goToAccount" rendered="#{empty request.remoteUser}"></b:navLink>
+                        </b:dropMenu>
+                        <b:navLink value="${msg['menu.authenticate']}" outcome="goToLogin" ></b:navLink>
+                        <b:navLink value="" outcome=""></b:navLink>
+                    </b:navbarLinks>
+                </b:navBar>
+            </ui:insert>
+
+            <h1><ui:insert name="title">DEFAULT TITLE</ui:insert></h1>  
+                <ui:insert name="content">
+                   <b:jumbotron>
+                    DEFAULT CONTETNT
+                  </b:jumbotron>
+                </ui:insert>
+            <div id ="footer">
+            <ui:insert name="bottom">
+                <p style="text-align:right;">Adam Gajak 2021</p>
+            </ui:insert>
+            </div>
+        </b:container>
+
+    </h:body>
+</html>

@@ -8,15 +8,15 @@
 
     <body>
 
-        <ui:composition template="./twkTemplate.xhtml">
+        <ui:composition template="./templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                HOME
+                ${msg['main.page']} 
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
-                    Witaj na stronie Tabletop Wargame Keeper.
+                    ${msg['app.welcome']}
                 </b:jumbotron>
             </ui:define>
 
