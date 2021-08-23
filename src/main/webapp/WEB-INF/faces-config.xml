@@ -48,6 +48,11 @@
             <from-outcome>goToMainPage</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
             <redirect />
-        </navigation-case> 
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToLeagues</from-outcome>
+            <to-view-id>/leagues.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>  
     </navigation-rule>
 </faces-config>

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
+import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.League;
 
@@ -22,12 +23,13 @@ public class LeagueEndpoint {
     
     @EJB
     LeagueFacade leagueFacade;
+    GameSystemFacade gameSystem;
 
     public List<LeagueDTO> listAllLeagues(){
         List<LeagueDTO> listLeaguesDTO = new ArrayList<>();
         List<League> listLeagues = leagueFacade.findAll();
         for (League league : listLeagues){
-            LeagueDTO leagueDTO = new LeagueDTO(league.getId(), league.getLeagueName());
+            LeagueDTO leagueDTO = new LeagueDTO(league.getId(), league.getLeagueName(), league.getGameSystemId());
             listLeaguesDTO.add(leagueDTO);
         }
         

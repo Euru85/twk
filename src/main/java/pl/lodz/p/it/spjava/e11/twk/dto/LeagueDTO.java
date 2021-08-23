@@ -5,6 +5,8 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
+import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
+
 /**
  *
  * @author Adam
@@ -13,13 +15,15 @@ public class LeagueDTO {
 
     private Long id;
     private String leagueName;
+    private GameSystem gameSystemId;
 
     public LeagueDTO() {
     }
     
-    public LeagueDTO(Long id, String leagueName) {
+    public LeagueDTO(Long id, String leagueName, GameSystem gameSystemId) {
         this.id = id;
         this.leagueName = leagueName;
+        this.gameSystemId = gameSystemId;
     }
 
     public Long getId() {
@@ -36,6 +40,14 @@ public class LeagueDTO {
 
     public void setLeagueName(String leagueName) {
         this.leagueName = leagueName;
+    }
+    
+    public GameSystem getGameSystemId() {
+        return gameSystemId;
+    }
+
+    public void setGameSystem(GameSystem gameSystemId) {
+        this.gameSystemId = gameSystemId;
     }
 
 }
