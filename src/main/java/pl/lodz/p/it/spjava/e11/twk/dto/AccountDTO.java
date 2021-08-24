@@ -5,7 +5,6 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
-import pl.lodz.p.it.spjava.e11.twk.model.Account;
 
 /**
  *

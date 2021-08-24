@@ -55,10 +55,19 @@
             <redirect />
         </navigation-case>
         <navigation-case>
-            <from-outcome>goAccounts</from-outcome>
+            <from-outcome>goToAccounts</from-outcome>
             <to-view-id>/account/accounts.xhtml</to-view-id>
             <redirect />
-        </navigation-case>  
-    </navigation-rule>  
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToSystems</from-outcome>
+            <to-view-id>/systems/systems.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToPlayers</from-outcome>
+            <to-view-id>/player/players.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>       
     </navigation-rule>
 </faces-config>
