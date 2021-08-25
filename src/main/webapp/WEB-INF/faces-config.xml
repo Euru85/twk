@@ -68,6 +68,11 @@
             <from-outcome>goToPlayers</from-outcome>
             <to-view-id>/player/players.xhtml</to-view-id>
             <redirect />
-        </navigation-case>       
+        </navigation-case> 
+        <navigation-case>
+            <from-outcome>goToAdministrators</from-outcome>
+            <to-view-id>/administrator/administrators.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>         
     </navigation-rule>
 </faces-config>

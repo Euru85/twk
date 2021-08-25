@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO;
 import pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO;
 
 
@@ -26,7 +27,8 @@ public class ListAccountProfilePageBean {
     private List<AccountDTO> listAccountDTO;
     private List<AccountDataDTO> listAccountDataDTO;
     private List<PlayerDTO> listPlayerDTO;
-    
+    private List<AdministratorDTO> listAdminDTO;
+
     public ListAccountProfilePageBean() {
     }
 
@@ -54,6 +56,17 @@ public class ListAccountProfilePageBean {
         this.listPlayerDTO = listPlayerDTO;
     }
     
+    public List<AdministratorDTO> getListAdminDTO() {
+        return listAdminDTO;
+    }
+
+    public void setListAdminDTO(List<AdministratorDTO> listAdminDTO) {
+        this.listAdminDTO = listAdminDTO;
+    }
+    
+    public boolean isAdmin(Long id){
+        return accountProfileEndpoint.isAdmin(id);
+    } 
     
     
     @PostConstruct
@@ -61,6 +74,7 @@ public class ListAccountProfilePageBean {
         listAccountDTO = accountProfileEndpoint.listAllAccounts();
         listAccountDataDTO = accountProfileEndpoint.listAllAccountDatas();
         listPlayerDTO = accountProfileEndpoint.listAllPlayers();
+        listAdminDTO = accountProfileEndpoint.listAllAdmins();
     }
     
 }

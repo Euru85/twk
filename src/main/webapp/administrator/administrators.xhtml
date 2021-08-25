@@ -11,27 +11,18 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.accounts']} 
+                ${msg['account.admins']} 
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{listAccountProfilePageBean.getListAccountDataDTO()}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{listAccountProfilePageBean.listAdminDTO}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.login']} ">
                                 <b:commandButton action="#" look="link" value="#{row.accountId.login}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['account.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.acoountName}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['account.surname']} ">
-                                <b:commandButton action="#" look="link" value="#{row.surname}" />
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['account.admin']} ">
-                                <b:commandButton action="#" look="link" value="#{listAccountProfilePageBean.isAdmin(row.accountId.id)}" />
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>

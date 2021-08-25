@@ -12,6 +12,9 @@ import pl.lodz.p.it.spjava.e11.twk.model.AccountData;
 import pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.Player;
+import pl.lodz.p.it.spjava.e11.twk.model.Administrator;
+import pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO;
+import pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade;
 
 @Stateful
 public class AccountProfileEndpoint {
@@ -20,7 +23,9 @@ public class AccountProfileEndpoint {
     @EJB
     AccountFacade accountFacade;
     @EJB
-    PlayerFacade aplayerFacade;
+    PlayerFacade playerFacade;
+    @EJB
+    AdministratorFacade adminFacade;
     
     public List<AccountDataDTO> listAllAccountDatas(){
         List<AccountDataDTO> listAccountDatasDTO = new ArrayList<>();
@@ -46,13 +51,33 @@ public class AccountProfileEndpoint {
     
     public List<PlayerDTO> listAllPlayers(){
         List<PlayerDTO> listPlayersDTO = new ArrayList<>();
-        List<Player> listPlayers = aplayerFacade.findAll();
+        List<Player> listPlayers = playerFacade.findAll();
         for (Player player : listPlayers){
             PlayerDTO playerDTO = new PlayerDTO(player.getId(), player.getNick(), player.getGameClub() , player.getAccountId() );
             listPlayersDTO.add(playerDTO);
         }
         
         return listPlayersDTO;
+    }
+    
+    public List<AdministratorDTO> listAllAdmins(){
+        List<AdministratorDTO> listAdminsDTO = new ArrayList<>();
+        List<Administrator> listAdmins = adminFacade.findAll();
+        for (Administrator admin : listAdmins){
+            AdministratorDTO adminDTO = new AdministratorDTO(admin.getId(), admin.getAccountId() );
+            listAdminsDTO.add(adminDTO);
+        }
+        
+        return listAdminsDTO;
+    }
+    
+    
+    public boolean isAdmin(Long id){  
+        List<AdministratorDTO> listAdminsDTO = listAllAdmins();
+        for (AdministratorDTO adminDTO : listAdminsDTO ){
+            if (adminDTO.getId().equals(id)) return true;
+        }
+        return false;
     }
     
 }
