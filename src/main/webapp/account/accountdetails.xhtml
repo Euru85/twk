@@ -11,27 +11,24 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.accounts']} 
+                ${msg['menu.accounts.details']} ${showAccountDetailsPageBean.accountDTO.login}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{listAccountProfilePageBean.getListAccountDataDTO()}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{showAccountDetailsPageBean}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
+                                 <b:commandButton action="#" look="link" value="#{row.accountDTO.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.login']} ">
-                                <b:commandButton action="#{listAccountProfilePageBean.showAccountDetailsAction(row.accountId.id)}" look="link" value="#{row.accountId.login}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.accountDTO.login}" /> 
                             </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['account.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.accountName}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['account.surname']} ">
-                                <b:commandButton action="#" look="link" value="#{row.surname}" />
+                            <b:dataTableColumn label="${msg['general.name']} ">
+                                <b:commandButton action="#" look="link" value="#{row.accountDataDTO.accountName}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.admin']} ">
-                                <b:commandButton action="#" look="link" value="#{listAccountProfilePageBean.isAdmin(row.accountId.id)}" />
+                                <b:commandButton action="#" look="link" value="#{showAccountDetailsPageBean.admin}" />
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>

@@ -15,16 +15,16 @@ import pl.lodz.p.it.spjava.e11.twk.model.Account;
 public class AccountDataDTO {
 
     private Long id;
-    private String acoountName;
+    private String accountName;
     private String surname;
     private Account accountId;
 
     public AccountDataDTO() {
     }
 
-    public AccountDataDTO(Long id, String acoountName, String surname, Account accountId) {
+    public AccountDataDTO(Long id, String accountName, String surname, Account accountId) {
         this.id = id;
-        this.acoountName = acoountName;
+        this.accountName = accountName;
         this.surname = surname;
         this.accountId = accountId;
     }
@@ -37,12 +37,12 @@ public class AccountDataDTO {
         this.id = id;
     }
 
-    public String getAcoountName() {
-        return acoountName;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setAcoountName(String acoountName) {
-        this.acoountName = acoountName;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public String getSurname() {

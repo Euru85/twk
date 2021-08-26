@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "AccountData.findAll", query = "SELECT a FROM AccountData a"),
     @NamedQuery(name = "AccountData.findById", query = "SELECT a FROM AccountData a WHERE a.id = :id"),
     @NamedQuery(name = "AccountData.findByVer", query = "SELECT a FROM AccountData a WHERE a.ver = :ver"),
-    @NamedQuery(name = "AccountData.findByAcoountName", query = "SELECT a FROM AccountData a WHERE a.acoountName = :acoountName"),
+    @NamedQuery(name = "AccountData.findByAccountName", query = "SELECT a FROM AccountData a WHERE a.accountName = :accountName"),
     @NamedQuery(name = "AccountData.findBySurname", query = "SELECT a FROM AccountData a WHERE a.surname = :surname")})
 public class AccountData implements Serializable {
 
@@ -45,8 +45,8 @@ public class AccountData implements Serializable {
     @Version
     private Long ver;
     @Size(max = 64)
-    @Column(name = "acoount_name", nullable = false)
-    private String acoountName;
+    @Column(name = "account_name", nullable = false)
+    private String accountName;
     @Size(max = 64)
     @Column(name = "surname")
     private String surname;
@@ -73,12 +73,12 @@ public class AccountData implements Serializable {
         return ver;
     }
 
-    public String getAcoountName() {
-        return acoountName;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public void setAcoountName(String acoountName) {
-        this.acoountName = acoountName;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public String getSurname() {

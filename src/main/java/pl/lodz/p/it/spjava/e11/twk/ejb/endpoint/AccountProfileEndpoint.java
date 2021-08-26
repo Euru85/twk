@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.e11.twk.ejb.endpoint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
@@ -27,11 +28,12 @@ public class AccountProfileEndpoint {
     @EJB
     AdministratorFacade adminFacade;
     
-    public List<AccountDataDTO> listAllAccountDatas(){
+
+       public List<AccountDataDTO> listAllAccountDatas(){
         List<AccountDataDTO> listAccountDatasDTO = new ArrayList<>();
         List<AccountData> listAccountDatas = accountDataFacade.findAll();
         for (AccountData accountData : listAccountDatas){
-            AccountDataDTO accountDataDTO = new AccountDataDTO(accountData.getId(), accountData.getAcoountName(), accountData.getSurname() , accountData.getAccountId() );
+            AccountDataDTO accountDataDTO = new AccountDataDTO(accountData.getId(), accountData.getAccountName(), accountData.getSurname() , accountData.getAccountId() );
             listAccountDatasDTO.add(accountDataDTO);
         }
         
@@ -71,12 +73,41 @@ public class AccountProfileEndpoint {
         return listAdminsDTO;
     }
     
+    public AccountDTO getAccountById(Long id){
+        List<AccountDTO> listAccountDTO = listAllAccounts();
+        for (AccountDTO accountDTO : listAccountDTO ){
+            if (accountDTO.getId().equals(id)) return accountDTO;
+        }
+        return null;
+    }
+    
+    public AccountDataDTO listDataByAccountId(Long id){
+        List<AccountDataDTO> listAccountDataDTO = listAllAccountDatas();
+        for (AccountDataDTO accountDataDTO : listAccountDataDTO ){
+            if (accountDataDTO.getId().equals(id)) return accountDataDTO;
+        }
+        return null;
+    }
     
     public boolean isAdmin(Long id){  
         List<AdministratorDTO> listAdminsDTO = listAllAdmins();
         for (AdministratorDTO adminDTO : listAdminsDTO ){
             if (adminDTO.getId().equals(id)) return true;
         }
+        return false;
+    }
+    
+    
+    public PlayerDTO listPlayerByAccountId(Long id){
+        List<PlayerDTO> listPlayersDTO = listAllPlayers();
+        for (PlayerDTO playerDTO : listPlayersDTO ){
+            if (playerDTO.getId().equals(id)) return playerDTO;
+        }
+        return null;
+    }
+    
+    public boolean isPlayer(Long id){  
+        if (Objects.nonNull(listPlayerByAccountId(id)) ) return true;
         return false;
     }
     

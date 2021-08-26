@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO;
@@ -28,6 +29,8 @@ public class ListAccountProfilePageBean {
     private List<AccountDataDTO> listAccountDataDTO;
     private List<PlayerDTO> listPlayerDTO;
     private List<AdministratorDTO> listAdminDTO;
+    @Inject
+    private AccountController accountController;
 
     public ListAccountProfilePageBean() {
     }
@@ -67,6 +70,11 @@ public class ListAccountProfilePageBean {
     public boolean isAdmin(Long id){
         return accountProfileEndpoint.isAdmin(id);
     } 
+    
+    public String showAccountDetailsAction(final Long id){
+       accountController.setSelectedAccountId(id);
+        return "goToAccountDetails";
+    }
     
     
     @PostConstruct
