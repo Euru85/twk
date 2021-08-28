@@ -5,7 +5,13 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.ejb.endpoint;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import pl.lodz.p.it.spjava.e11.twk.dto.ArmyDTO;
+import pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade;
+import pl.lodz.p.it.spjava.e11.twk.model.Army;
 
 /**
  *
@@ -14,6 +20,17 @@ import javax.ejb.Stateful;
 @Stateful
 public class ArmyEndpoint {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB     
+    ArmyFacade armyFacade;
+
+    public List<ArmyDTO> listAllArmys(){
+        List<ArmyDTO> listArmysDTO = new ArrayList<>();
+        List<Army> listArmys = armyFacade.findAll();
+        for (Army army : listArmys){
+            ArmyDTO armyDTO = new ArmyDTO(army.getId(), army.getArmyName());
+            listArmysDTO.add(armyDTO);
+        }
+        
+        return listArmysDTO;
+    }
 }

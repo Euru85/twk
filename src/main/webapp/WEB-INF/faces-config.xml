@@ -78,6 +78,11 @@
             <from-outcome>goToAccountDetails</from-outcome>
             <to-view-id>/account/accountdetails.xhtml</to-view-id>
             <redirect />
-        </navigation-case>         
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToArmies</from-outcome>
+            <to-view-id>/army/armies.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>             
     </navigation-rule>
 </faces-config>
