@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -38,19 +36,20 @@ public class League implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Size(max = 50)
-    @Column(name = "league_name", unique = true, nullable = false, updatable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "LEAGUE_NAME")
     private String leagueName;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
+    @Column(name = "VER")
+    private BigInteger ver;
     @OneToMany(mappedBy = "leagueId")
     private List<Tournament> tournamentList;
-    @JoinColumn(name = "game_system_id", referencedColumnName = "id")
+    @JoinColumn(name = "GAME_SYSTEM_ID", referencedColumnName = "ID")
     @ManyToOne
     private GameSystem gameSystemId;
 
@@ -59,6 +58,11 @@ public class League implements Serializable {
 
     public League(Long id) {
         this.id = id;
+    }
+
+    public League(Long id, String leagueName) {
+        this.id = id;
+        this.leagueName = leagueName;
     }
 
     public Long getId() {
@@ -77,8 +81,12 @@ public class League implements Serializable {
         this.leagueName = leagueName;
     }
 
-    public Long getVer() {
+    public BigInteger getVer() {
         return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

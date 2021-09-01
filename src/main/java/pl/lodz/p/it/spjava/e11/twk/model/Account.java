@@ -6,18 +6,17 @@
 package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -29,29 +28,34 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
+    @NamedQuery(name = "Account.findByActive", query = "SELECT a FROM Account a WHERE a.active = :active"),
     @NamedQuery(name = "Account.findByLogin", query = "SELECT a FROM Account a WHERE a.login = :login"),
-    @NamedQuery(name = "Account.findByVer", query = "SELECT a FROM Account a WHERE a.ver = :ver"),
     @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password"),
-    @NamedQuery(name = "Account.findByActive", query = "SELECT a FROM Account a WHERE a.active = :active")})
+    @NamedQuery(name = "Account.findByVer", query = "SELECT a FROM Account a WHERE a.ver = :ver")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Size(max = 255)
-    @Column(name = "login", unique = true, nullable = false, updatable = false)
-    private String login;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Size(max = 64)
-    @Column(name = "password", nullable = false, updatable = false)
-    private String password;
-    @Column(name = "active", nullable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ACTIVE")
     private Boolean active;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "LOGIN")
+    private String login;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "PASSWORD")
+    private String password;
+    @Column(name = "VER")
+    private BigInteger ver;
     @OneToMany(mappedBy = "lastModifiedById")
     private List<Tournament> tournamentList;
     @OneToMany(mappedBy = "accountId")
@@ -70,12 +74,27 @@ public class Account implements Serializable {
         this.id = id;
     }
 
+    public Account(Long id, Boolean active, String login, String password) {
+        this.id = id;
+        this.active = active;
+        this.login = login;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String getLogin() {
@@ -86,10 +105,6 @@ public class Account implements Serializable {
         this.login = login;
     }
 
-    public Long getVer() {
-        return ver;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -98,12 +113,12 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public Boolean getActive() {
-        return active;
+    public BigInteger getVer() {
+        return ver;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

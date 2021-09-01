@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,49 +30,52 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Tournament.findAll", query = "SELECT t FROM Tournament t"),
     @NamedQuery(name = "Tournament.findById", query = "SELECT t FROM Tournament t WHERE t.id = :id"),
-    @NamedQuery(name = "Tournament.findByVer", query = "SELECT t FROM Tournament t WHERE t.ver = :ver"),
-    @NamedQuery(name = "Tournament.findByDescription", query = "SELECT t FROM Tournament t WHERE t.description = :description"),
     @NamedQuery(name = "Tournament.findByClosed", query = "SELECT t FROM Tournament t WHERE t.closed = :closed"),
+    @NamedQuery(name = "Tournament.findByCurrentRound", query = "SELECT t FROM Tournament t WHERE t.currentRound = :currentRound"),
+    @NamedQuery(name = "Tournament.findByDescription", query = "SELECT t FROM Tournament t WHERE t.description = :description"),
     @NamedQuery(name = "Tournament.findByRounds", query = "SELECT t FROM Tournament t WHERE t.rounds = :rounds"),
-    @NamedQuery(name = "Tournament.findByCurrentRound", query = "SELECT t FROM Tournament t WHERE t.currentRound = :currentRound")})
+    @NamedQuery(name = "Tournament.findByTournamentName", query = "SELECT t FROM Tournament t WHERE t.tournamentName = :tournamentName"),
+    @NamedQuery(name = "Tournament.findByVer", query = "SELECT t FROM Tournament t WHERE t.ver = :ver")})
 public class Tournament implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Size(max = 2000)
-    @Column(name = "tournament_name",nullable = false, updatable = true)
-    private String tournamentName;
-    @Size(max = 2000)
-    @Column(name = "description")
-    private String description;
-    @Column(name = "closed",nullable = false, updatable = true)
-    private Boolean closed;
-    @Column(name = "rounds")
-    private Integer rounds;
-    @Column(name = "current_round")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "CLOSED")
+    private short closed;
+    @Column(name = "CURRENT_ROUND")
     private Integer currentRound;
-    @JoinColumn(name = "last_modified_by_id", referencedColumnName = "id")
+    @Size(max = 255)
+    @Column(name = "DESCRIPTION")
+    private String description;
+    @Column(name = "ROUNDS")
+    private Integer rounds;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "TOURNAMENT_NAME")
+    private String tournamentName;
+    @Column(name = "VER")
+    private BigInteger ver;
+    @JoinColumn(name = "LAST_MODIFIED_BY_ID", referencedColumnName = "ID")
     @ManyToOne
     private Account lastModifiedById;
-    @JoinColumn(name = "game_system_id", referencedColumnName = "id")
+    @JoinColumn(name = "GAME_SYSTEM_ID", referencedColumnName = "ID")
     @ManyToOne
     private GameSystem gameSystemId;
-    @JoinColumn(name = "league_id", referencedColumnName = "id")
+    @JoinColumn(name = "LEAGUE_ID", referencedColumnName = "ID")
     @ManyToOne
     private League leagueId;
-    @JoinColumn(name = "organizator_id", referencedColumnName = "id")
+    @JoinColumn(name = "ORGANIZATOR_ID", referencedColumnName = "ID")
     @ManyToOne
     private Organizator organizatorId;
-    @JoinColumn(name = "participant_id", referencedColumnName = "id")
-    @ManyToOne
-    private TParticipant participantId;
+    @OneToMany(mappedBy = "tournamentId")
+    private List<TRound> tRoundList;
     @OneToMany(mappedBy = "tournamentId")
     private List<TParticipant> tParticipantList;
 
@@ -85,6 +86,12 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
+    public Tournament(Long id, short closed, String tournamentName) {
+        this.id = id;
+        this.closed = closed;
+        this.tournamentName = tournamentName;
+    }
+
     public Long getId() {
         return id;
     }
@@ -93,8 +100,20 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
-        return ver;
+    public short getClosed() {
+        return closed;
+    }
+
+    public void setClosed(short closed) {
+        this.closed = closed;
+    }
+
+    public Integer getCurrentRound() {
+        return currentRound;
+    }
+
+    public void setCurrentRound(Integer currentRound) {
+        this.currentRound = currentRound;
     }
 
     public String getDescription() {
@@ -105,14 +124,6 @@ public class Tournament implements Serializable {
         this.description = description;
     }
 
-    public Boolean getClosed() {
-        return closed;
-    }
-
-    public void setClosed(Boolean closed) {
-        this.closed = closed;
-    }
-
     public Integer getRounds() {
         return rounds;
     }
@@ -121,12 +132,20 @@ public class Tournament implements Serializable {
         this.rounds = rounds;
     }
 
-    public Integer getCurrentRound() {
-        return currentRound;
+    public String getTournamentName() {
+        return tournamentName;
     }
 
-    public void setCurrentRound(Integer currentRound) {
-        this.currentRound = currentRound;
+    public void setTournamentName(String tournamentName) {
+        this.tournamentName = tournamentName;
+    }
+
+    public BigInteger getVer() {
+        return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public Account getLastModifiedById() {
@@ -161,12 +180,12 @@ public class Tournament implements Serializable {
         this.organizatorId = organizatorId;
     }
 
-    public TParticipant getParticipantId() {
-        return participantId;
+    public List<TRound> getTRoundList() {
+        return tRoundList;
     }
 
-    public void setParticipantId(TParticipant participantId) {
-        this.participantId = participantId;
+    public void setTRoundList(List<TRound> tRoundList) {
+        this.tRoundList = tRoundList;
     }
 
     public List<TParticipant> getTParticipantList() {

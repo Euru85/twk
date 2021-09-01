@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -36,26 +34,23 @@ public class TParticipant implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @OneToMany(mappedBy = "participantId")
-    private List<Tournament> tournamentList;
-    @OneToMany(mappedBy = "playerA")
+    @Column(name = "VER")
+    private BigInteger ver;
+    @OneToMany(mappedBy = "playerb")
     private List<TGame> tGameList;
-    @OneToMany(mappedBy = "playerB")
+    @OneToMany(mappedBy = "playera")
     private List<TGame> tGameList1;
-    @JoinColumn(name = "army_id", referencedColumnName = "id")
+    @JoinColumn(name = "ARMY_ID", referencedColumnName = "ID")
     @ManyToOne
     private Army armyId;
-    @JoinColumn(name = "player_id", referencedColumnName = "id")
+    @JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")
     @ManyToOne
     private Player playerId;
-    @JoinColumn(name = "tournament_id", referencedColumnName = "id")
+    @JoinColumn(name = "TOURNAMENT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Tournament tournamentId;
     @OneToMany(mappedBy = "participantId")
@@ -76,16 +71,12 @@ public class TParticipant implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
+    public BigInteger getVer() {
         return ver;
     }
 
-    public List<Tournament> getTournamentList() {
-        return tournamentList;
-    }
-
-    public void setTournamentList(List<Tournament> tournamentList) {
-        this.tournamentList = tournamentList;
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public List<TGame> getTGameList() {

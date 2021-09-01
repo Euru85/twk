@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,27 +30,26 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Player.findAll", query = "SELECT p FROM Player p"),
     @NamedQuery(name = "Player.findById", query = "SELECT p FROM Player p WHERE p.id = :id"),
-    @NamedQuery(name = "Player.findByVer", query = "SELECT p FROM Player p WHERE p.ver = :ver"),
+    @NamedQuery(name = "Player.findByGameClub", query = "SELECT p FROM Player p WHERE p.gameClub = :gameClub"),
     @NamedQuery(name = "Player.findByNick", query = "SELECT p FROM Player p WHERE p.nick = :nick"),
-    @NamedQuery(name = "Player.findByGameClub", query = "SELECT p FROM Player p WHERE p.gameClub = :gameClub")})
+    @NamedQuery(name = "Player.findByVer", query = "SELECT p FROM Player p WHERE p.ver = :ver")})
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Size(max = 64)
-    @Column(name = "nick")
-    private String nick;
-    @Size(max = 64)
-    @Column(name = "game_club")
+    @Size(max = 255)
+    @Column(name = "GAME_CLUB")
     private String gameClub;
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @Size(max = 255)
+    @Column(name = "NICK")
+    private String nick;
+    @Column(name = "VER")
+    private BigInteger ver;
+    @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Account accountId;
     @OneToMany(mappedBy = "playerId")
@@ -73,8 +70,12 @@ public class Player implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
-        return ver;
+    public String getGameClub() {
+        return gameClub;
+    }
+
+    public void setGameClub(String gameClub) {
+        this.gameClub = gameClub;
     }
 
     public String getNick() {
@@ -85,12 +86,12 @@ public class Player implements Serializable {
         this.nick = nick;
     }
 
-    public String getGameClub() {
-        return gameClub;
+    public BigInteger getVer() {
+        return ver;
     }
 
-    public void setGameClub(String gameClub) {
-        this.gameClub = gameClub;
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public Account getAccountId() {

@@ -18,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -30,22 +30,23 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Army.findAll", query = "SELECT a FROM Army a"),
     @NamedQuery(name = "Army.findById", query = "SELECT a FROM Army a WHERE a.id = :id"),
-    @NamedQuery(name = "Army.findByVer", query = "SELECT a FROM Army a WHERE a.ver = :ver"),
-    @NamedQuery(name = "Army.findByArmyName", query = "SELECT a FROM Army a WHERE a.armyName = :armyName")})
+    @NamedQuery(name = "Army.findByArmyName", query = "SELECT a FROM Army a WHERE a.armyName = :armyName"),
+    @NamedQuery(name = "Army.findByVer", query = "SELECT a FROM Army a WHERE a.ver = :ver")})
 public class Army implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Size(max = 100)
-    @Column(name = "army_name",unique = true, nullable = false, updatable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "ARMY_NAME")
     private String armyName;
+    @Column(name = "VER")
+    private BigInteger ver;
     @OneToMany(mappedBy = "armyId")
     private List<TParticipant> tParticipantList;
 
@@ -56,6 +57,11 @@ public class Army implements Serializable {
         this.id = id;
     }
 
+    public Army(Long id, String armyName) {
+        this.id = id;
+        this.armyName = armyName;
+    }
+
     public Long getId() {
         return id;
     }
@@ -64,16 +70,20 @@ public class Army implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
-        return ver;
-    }
-
     public String getArmyName() {
         return armyName;
     }
 
     public void setArmyName(String armyName) {
         this.armyName = armyName;
+    }
+
+    public BigInteger getVer() {
+        return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public List<TParticipant> getTParticipantList() {

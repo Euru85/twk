@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -31,26 +29,28 @@ import javax.persistence.Version;
 @NamedQueries({
     @NamedQuery(name = "TRound.findAll", query = "SELECT t FROM TRound t"),
     @NamedQuery(name = "TRound.findById", query = "SELECT t FROM TRound t WHERE t.id = :id"),
+    @NamedQuery(name = "TRound.findByClosed", query = "SELECT t FROM TRound t WHERE t.closed = :closed"),
     @NamedQuery(name = "TRound.findByVer", query = "SELECT t FROM TRound t WHERE t.ver = :ver"),
-    @NamedQuery(name = "TRound.findByClosed", query = "SELECT t FROM TRound t WHERE t.closed = :closed")})
+    @NamedQuery(name = "TRound.findByRoundNumber", query = "SELECT t FROM TRound t WHERE t.roundNumber = :roundNumber")})
 public class TRound implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Column(name = "closed")
-    private Boolean closed;
+    @Column(name = "CLOSED")
+    private Short closed;
+    @Column(name = "VER")
+    private BigInteger ver;
+    @Column(name = "ROUND_NUMBER")
+    private BigInteger roundNumber;
     @OneToMany(mappedBy = "roundId")
     private List<TGame> tGameList;
-    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    @JoinColumn(name = "TOURNAMENT_ID", referencedColumnName = "ID")
     @ManyToOne
-    private TGame gameId;
+    private Tournament tournamentId;
 
     public TRound() {
     }
@@ -67,16 +67,28 @@ public class TRound implements Serializable {
         this.id = id;
     }
 
-    public Long  getVer() {
-        return ver;
-    }
-
-    public Boolean getClosed() {
+    public Short getClosed() {
         return closed;
     }
 
-    public void setClosed(Boolean closed) {
+    public void setClosed(Short closed) {
         this.closed = closed;
+    }
+
+    public BigInteger getVer() {
+        return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
+    }
+
+    public BigInteger getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setRoundNumber(BigInteger roundNumber) {
+        this.roundNumber = roundNumber;
     }
 
     public List<TGame> getTGameList() {
@@ -87,12 +99,12 @@ public class TRound implements Serializable {
         this.tGameList = tGameList;
     }
 
-    public TGame getGameId() {
-        return gameId;
+    public Tournament getTournamentId() {
+        return tournamentId;
     }
 
-    public void setGameId(TGame gameId) {
-        this.gameId = gameId;
+    public void setTournamentId(Tournament tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     @Override

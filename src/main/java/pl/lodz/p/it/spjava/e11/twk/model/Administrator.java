@@ -10,15 +10,13 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -34,14 +32,13 @@ public class Administrator implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id", unique = true, nullable = false, updatable = false)
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @Column(name = "VER")
+    private BigInteger ver;
+    @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Account accountId;
 
@@ -60,8 +57,12 @@ public class Administrator implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
+    public BigInteger getVer() {
         return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public Account getAccountId() {

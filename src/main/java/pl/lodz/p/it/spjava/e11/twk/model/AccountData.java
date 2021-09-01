@@ -10,15 +10,13 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -30,27 +28,26 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "AccountData.findAll", query = "SELECT a FROM AccountData a"),
     @NamedQuery(name = "AccountData.findById", query = "SELECT a FROM AccountData a WHERE a.id = :id"),
+    @NamedQuery(name = "AccountData.findBySurname", query = "SELECT a FROM AccountData a WHERE a.surname = :surname"),
     @NamedQuery(name = "AccountData.findByVer", query = "SELECT a FROM AccountData a WHERE a.ver = :ver"),
-    @NamedQuery(name = "AccountData.findByAccountName", query = "SELECT a FROM AccountData a WHERE a.accountName = :accountName"),
-    @NamedQuery(name = "AccountData.findBySurname", query = "SELECT a FROM AccountData a WHERE a.surname = :surname")})
+    @NamedQuery(name = "AccountData.findByAccountName", query = "SELECT a FROM AccountData a WHERE a.accountName = :accountName")})
 public class AccountData implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id",unique = true, nullable = false, updatable = false)
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Size(max = 64)
-    @Column(name = "account_name", nullable = false)
-    private String accountName;
-    @Size(max = 64)
-    @Column(name = "surname")
+    @Size(max = 255)
+    @Column(name = "SURNAME")
     private String surname;
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @Column(name = "VER")
+    private BigInteger ver;
+    @Size(max = 64)
+    @Column(name = "ACCOUNT_NAME")
+    private String accountName;
+    @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Account accountId;
 
@@ -69,8 +66,20 @@ public class AccountData implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public BigInteger getVer() {
         return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public String getAccountName() {
@@ -79,14 +88,6 @@ public class AccountData implements Serializable {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public Account getAccountId() {

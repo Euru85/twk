@@ -7,20 +7,16 @@ package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -31,47 +27,44 @@ import javax.persistence.Version;
 @NamedQueries({
     @NamedQuery(name = "TGame.findAll", query = "SELECT t FROM TGame t"),
     @NamedQuery(name = "TGame.findById", query = "SELECT t FROM TGame t WHERE t.id = :id"),
-    @NamedQuery(name = "TGame.findByVer", query = "SELECT t FROM TGame t WHERE t.ver = :ver"),
-    @NamedQuery(name = "TGame.findByScoreAbig", query = "SELECT t FROM TGame t WHERE t.scoreAbig = :scoreAbig"),
-    @NamedQuery(name = "TGame.findByScoreAsmall", query = "SELECT t FROM TGame t WHERE t.scoreAsmall = :scoreAsmall"),
-    @NamedQuery(name = "TGame.findByScoreBbig", query = "SELECT t FROM TGame t WHERE t.scoreBbig = :scoreBbig"),
-    @NamedQuery(name = "TGame.findByScoreBsmall", query = "SELECT t FROM TGame t WHERE t.scoreBsmall = :scoreBsmall"),
+    @NamedQuery(name = "TGame.findByPenaltyB", query = "SELECT t FROM TGame t WHERE t.penaltyB = :penaltyB"),
     @NamedQuery(name = "TGame.findByPenatlyA", query = "SELECT t FROM TGame t WHERE t.penatlyA = :penatlyA"),
-    @NamedQuery(name = "TGame.findByPenaltyB", query = "SELECT t FROM TGame t WHERE t.penaltyB = :penaltyB")})
+    @NamedQuery(name = "TGame.findByScoreABig", query = "SELECT t FROM TGame t WHERE t.scoreABig = :scoreABig"),
+    @NamedQuery(name = "TGame.findByScoreASmall", query = "SELECT t FROM TGame t WHERE t.scoreASmall = :scoreASmall"),
+    @NamedQuery(name = "TGame.findByScoreBBig", query = "SELECT t FROM TGame t WHERE t.scoreBBig = :scoreBBig"),
+    @NamedQuery(name = "TGame.findByScoreBSmall", query = "SELECT t FROM TGame t WHERE t.scoreBSmall = :scoreBSmall"),
+    @NamedQuery(name = "TGame.findByVer", query = "SELECT t FROM TGame t WHERE t.ver = :ver")})
 public class TGame implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
-    @Column(name = "score_A_big")
-    private Integer scoreAbig;
-    @Column(name = "score_A_small")
-    private Integer scoreAsmall;
-    @Column(name = "score_B_big")
-    private Integer scoreBbig;
-    @Column(name = "score_B_small")
-    private Integer scoreBsmall;
-    @Column(name = "penatly_A")
-    private Integer penatlyA;
-    @Column(name = "penalty_B")
+    @Column(name = "PENALTY_B")
     private Integer penaltyB;
-    @JoinColumn(name = "playerA", referencedColumnName = "id")
+    @Column(name = "PENATLY_A")
+    private Integer penatlyA;
+    @Column(name = "SCORE_A_BIG")
+    private Integer scoreABig;
+    @Column(name = "SCORE_A_SMALL")
+    private Integer scoreASmall;
+    @Column(name = "SCORE_B_BIG")
+    private Integer scoreBBig;
+    @Column(name = "SCORE_B_SMALL")
+    private Integer scoreBSmall;
+    @Column(name = "VER")
+    private BigInteger ver;
+    @JoinColumn(name = "PLAYERB", referencedColumnName = "ID")
     @ManyToOne
-    private TParticipant playerA;
-    @JoinColumn(name = "playerB", referencedColumnName = "id")
+    private TParticipant playerb;
+    @JoinColumn(name = "PLAYERA", referencedColumnName = "ID")
     @ManyToOne
-    private TParticipant playerB;
-    @JoinColumn(name = "round_id", referencedColumnName = "id")
+    private TParticipant playera;
+    @JoinColumn(name = "ROUND_ID", referencedColumnName = "ID")
     @ManyToOne
     private TRound roundId;
-    @OneToMany(mappedBy = "gameId")
-    private List<TRound> tRoundList;
 
     public TGame() {
     }
@@ -88,40 +81,12 @@ public class TGame implements Serializable {
         this.id = id;
     }
 
-    public Long getVer() {
-        return ver;
+    public Integer getPenaltyB() {
+        return penaltyB;
     }
 
-    public Integer getScoreAbig() {
-        return scoreAbig;
-    }
-
-    public void setScoreAbig(Integer scoreAbig) {
-        this.scoreAbig = scoreAbig;
-    }
-
-    public Integer getScoreAsmall() {
-        return scoreAsmall;
-    }
-
-    public void setScoreAsmall(Integer scoreAsmall) {
-        this.scoreAsmall = scoreAsmall;
-    }
-
-    public Integer getScoreBbig() {
-        return scoreBbig;
-    }
-
-    public void setScoreBbig(Integer scoreBbig) {
-        this.scoreBbig = scoreBbig;
-    }
-
-    public Integer getScoreBsmall() {
-        return scoreBsmall;
-    }
-
-    public void setScoreBsmall(Integer scoreBsmall) {
-        this.scoreBsmall = scoreBsmall;
+    public void setPenaltyB(Integer penaltyB) {
+        this.penaltyB = penaltyB;
     }
 
     public Integer getPenatlyA() {
@@ -132,28 +97,60 @@ public class TGame implements Serializable {
         this.penatlyA = penatlyA;
     }
 
-    public Integer getPenaltyB() {
-        return penaltyB;
+    public Integer getScoreABig() {
+        return scoreABig;
     }
 
-    public void setPenaltyB(Integer penaltyB) {
-        this.penaltyB = penaltyB;
+    public void setScoreABig(Integer scoreABig) {
+        this.scoreABig = scoreABig;
     }
 
-    public TParticipant getPlayerA() {
-        return playerA;
+    public Integer getScoreASmall() {
+        return scoreASmall;
     }
 
-    public void setPlayerA(TParticipant playerA) {
-        this.playerA = playerA;
+    public void setScoreASmall(Integer scoreASmall) {
+        this.scoreASmall = scoreASmall;
     }
 
-    public TParticipant getPlayerB() {
-        return playerB;
+    public Integer getScoreBBig() {
+        return scoreBBig;
     }
 
-    public void setPlayerB(TParticipant playerB) {
-        this.playerB = playerB;
+    public void setScoreBBig(Integer scoreBBig) {
+        this.scoreBBig = scoreBBig;
+    }
+
+    public Integer getScoreBSmall() {
+        return scoreBSmall;
+    }
+
+    public void setScoreBSmall(Integer scoreBSmall) {
+        this.scoreBSmall = scoreBSmall;
+    }
+
+    public BigInteger getVer() {
+        return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
+    }
+
+    public TParticipant getPlayerb() {
+        return playerb;
+    }
+
+    public void setPlayerb(TParticipant playerb) {
+        this.playerb = playerb;
+    }
+
+    public TParticipant getPlayera() {
+        return playera;
+    }
+
+    public void setPlayera(TParticipant playera) {
+        this.playera = playera;
     }
 
     public TRound getRoundId() {
@@ -162,14 +159,6 @@ public class TGame implements Serializable {
 
     public void setRoundId(TRound roundId) {
         this.roundId = roundId;
-    }
-
-    public List<TRound> getTRoundList() {
-        return tRoundList;
-    }
-
-    public void setTRoundList(List<TRound> tRoundList) {
-        this.tRoundList = tRoundList;
     }
 
     @Override

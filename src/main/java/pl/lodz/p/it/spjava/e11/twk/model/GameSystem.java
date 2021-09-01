@@ -11,14 +11,12 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -36,16 +34,17 @@ public class GameSystem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @Column(name = "ID")
     private Long id;
-    @Size(max = 50)
-    @Column(name = "system_name", unique = true, nullable = false, updatable = false)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "SYSTEM_NAME")
     private String systemName;
-    @Column(name = "ver")
-    @Version
-    private Long ver;
+    @Column(name = "VER")
+    private BigInteger ver;
     @OneToMany(mappedBy = "gameSystemId")
     private List<Tournament> tournamentList;
     @OneToMany(mappedBy = "gameSystemId")
@@ -56,6 +55,11 @@ public class GameSystem implements Serializable {
 
     public GameSystem(Long id) {
         this.id = id;
+    }
+
+    public GameSystem(Long id, String systemName) {
+        this.id = id;
+        this.systemName = systemName;
     }
 
     public Long getId() {
@@ -74,8 +78,12 @@ public class GameSystem implements Serializable {
         this.systemName = systemName;
     }
 
-    public Long getVer() {
+    public BigInteger getVer() {
         return ver;
+    }
+
+    public void setVer(BigInteger ver) {
+        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {
