@@ -38,12 +38,10 @@ public class TournamentEndpoint {
     
     public List<TournamentDTO> listTournamentsByLeagueDTO(LeagueDTO leagueDTO){
         List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
-        List<Tournament> listTournaments = tournamentFacade.findAll();
-        for (Tournament tournament : listTournaments){
+        for (Tournament tournament : leagueDTO.getTournamentList()){
             TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList());
-            if (tournamentDTO.getLeagueId().getId().equals(leagueDTO.getId())) listTournamentsDTO.add(tournamentDTO);
+            listTournamentsDTO.add(tournamentDTO);
         }
-        
         return listTournamentsDTO;
     }
 

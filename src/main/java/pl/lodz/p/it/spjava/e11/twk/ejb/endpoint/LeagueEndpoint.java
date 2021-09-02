@@ -30,7 +30,7 @@ public class LeagueEndpoint {
         List<LeagueDTO> listLeaguesDTO = new ArrayList<>();
         List<League> listLeagues = leagueFacade.findAll();
         for (League league : listLeagues){
-            LeagueDTO leagueDTO = new LeagueDTO(league.getId(), league.getLeagueName(), league.getGameSystemId());
+            LeagueDTO leagueDTO = new LeagueDTO(league.getId(), league.getLeagueName(), league.getGameSystemId(), league.getTournamentList());
             listLeaguesDTO.add(leagueDTO);
         }
         
