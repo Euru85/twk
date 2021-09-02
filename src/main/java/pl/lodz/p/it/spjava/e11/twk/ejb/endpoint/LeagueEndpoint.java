@@ -12,6 +12,7 @@ import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade;
+
 import pl.lodz.p.it.spjava.e11.twk.model.League;
 
 /**
@@ -35,4 +36,5 @@ public class LeagueEndpoint {
         
         return listLeaguesDTO;
     }
+   
 }

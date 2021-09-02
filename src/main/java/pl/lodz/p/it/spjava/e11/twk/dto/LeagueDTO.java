@@ -5,7 +5,9 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
+
 import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
+
 
 /**
  *
@@ -49,5 +51,5 @@ public class LeagueDTO {
     public void setGameSystem(GameSystem gameSystemId) {
         this.gameSystemId = gameSystemId;
     }
-
+    
 }

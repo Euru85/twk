@@ -47,7 +47,7 @@ public class Tournament implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CLOSED")
-    private short closed;
+    private Boolean closed;
     @Column(name = "CURRENT_ROUND")
     private Integer currentRound;
     @Size(max = 255)
@@ -86,7 +86,7 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
-    public Tournament(Long id, short closed, String tournamentName) {
+    public Tournament(Long id, Boolean closed, String tournamentName) {
         this.id = id;
         this.closed = closed;
         this.tournamentName = tournamentName;
@@ -100,11 +100,11 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
-    public short getClosed() {
+    public Boolean  getClosed() {
         return closed;
     }
 
-    public void setClosed(short closed) {
+    public void setClosed(Boolean  closed) {
         this.closed = closed;
     }
 

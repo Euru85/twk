@@ -83,6 +83,11 @@
             <from-outcome>goToArmies</from-outcome>
             <to-view-id>/army/armies.xhtml</to-view-id>
             <redirect />
-        </navigation-case>             
+        </navigation-case>   
+        <navigation-case>
+            <from-outcome>goToLeagueDetails</from-outcome>
+            <to-view-id>/league/leagueDetails.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>            
     </navigation-rule>
 </faces-config>

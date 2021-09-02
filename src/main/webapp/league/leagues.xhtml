@@ -17,12 +17,12 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{listLeaguePageBean.getListtLeagueDTO()}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{listLeaguePageBean.getListLeagueDTO()}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.leagueName}" /> 
+                                <b:commandButton action="#{listLeaguePageBean.showLeagueDetailsAction(row)}" look="link" value="#{row.leagueName}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.game_system']} ">
                                 <b:commandButton action="#" look="link" value="#{row.gameSystemId.systemName}" /> 

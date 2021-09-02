@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint;
 
@@ -20,22 +21,30 @@ public class ListLeaguePageBean {
 
     @EJB
     private LeagueEndpoint leagueEndpoint;
-    private List<LeagueDTO> listtLeagueDTO;
+    private List<LeagueDTO> listLeagueDTO;
+    @Inject
+    private LeagueController leagueController;
     
     public ListLeaguePageBean() {
     }
 
-    public List<LeagueDTO> getListtLeagueDTO() {
-        return listtLeagueDTO;
+    public List<LeagueDTO> getListLeagueDTO() {
+        return listLeagueDTO;
     }
 
-    public void setListtLeagueDTO(List<LeagueDTO> listtLeagueDTO) {
-        this.listtLeagueDTO = listtLeagueDTO;
+    public void setListLeagueDTO(List<LeagueDTO> listtLeagueDTO) {
+        this.listLeagueDTO = listtLeagueDTO;
     }
+    
+    public String showLeagueDetailsAction(LeagueDTO leagueDTO){
+        leagueController.setSelectedLeagueDTO(leagueDTO);
+        return "goToLeagueDetails";
+    }
+    
     
     @PostConstruct
     private void init(){
-        listtLeagueDTO = leagueEndpoint.listAllLeagues();
+        listLeagueDTO = leagueEndpoint.listAllLeagues();
     }
     
 }
