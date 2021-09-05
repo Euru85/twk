@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,14 +59,14 @@ public class Account implements Serializable {
     private BigInteger ver;
     @OneToMany(mappedBy = "lastModifiedById")
     private List<Tournament> tournamentList;
-    @OneToMany(mappedBy = "accountId")
-    private List<Administrator> administratorList;
-    @OneToMany(mappedBy = "accountId")
-    private List<Player> playerList;
-    @OneToMany(mappedBy = "accountId")
-    private List<Organizator> organizatorList;
-    @OneToMany(mappedBy = "accountId")
-    private List<AccountData> accountDataList;
+    @OneToOne(mappedBy = "accountId")
+    private Administrator administrator;
+    @OneToOne(mappedBy = "accountId")
+    private Player player;
+    @OneToOne(mappedBy = "accountId")
+    private Organizator organizator;
+    @OneToOne(mappedBy = "accountId")
+    private AccountData accountData;
 
     public Account() {
     }
@@ -129,36 +130,36 @@ public class Account implements Serializable {
         this.tournamentList = tournamentList;
     }
 
-    public List<Administrator> getAdministratorList() {
-        return administratorList;
+    public Administrator getAdministrator() {
+        return administrator;
     }
 
-    public void setAdministratorList(List<Administrator> administratorList) {
-        this.administratorList = administratorList;
+    public void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
     }
 
-    public List<Player> getPlayerList() {
-        return playerList;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public List<Organizator> getOrganizatorList() {
-        return organizatorList;
+    public Organizator getOrganizator() {
+        return organizator;
     }
 
-    public void setOrganizatorList(List<Organizator> organizatorList) {
-        this.organizatorList = organizatorList;
+    public void setOrganizator(Organizator organizator) {
+        this.organizator = organizator;
     }
 
-    public List<AccountData> getAccountDataList() {
-        return accountDataList;
+    public AccountData getAccountData() {
+        return accountData;
     }
 
-    public void setAccountDataList(List<AccountData> accountDataList) {
-        this.accountDataList = accountDataList;
+    public void setAccountData(AccountData accountData) {
+        this.accountData = accountData;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class ShowAccountDetailsPageBean {
     @EJB
     private AccountProfileEndpoint accountProfileEndpoint;
     private AccountProfileDTO accountProfileDTO;
-     private List<TournamentDTO> listTournamentDTO;
+    private List<TournamentDTO> listTournamentDTO;
     
     @Inject
     private AccountController accountController;
@@ -42,6 +42,7 @@ public class ShowAccountDetailsPageBean {
    @PostConstruct
     private void init(){
         accountProfileDTO = accountController.getSelectedAccountProfileDTO();
+        listTournamentDTO = accountProfileEndpoint.listTournamentsByAccountProfileDTO(accountController.getSelectedAccountProfileDTO());
     }
     
 }

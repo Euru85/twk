@@ -5,14 +5,8 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import pl.lodz.p.it.spjava.e11.twk.model.AccountData;
 import pl.lodz.p.it.spjava.e11.twk.model.Administrator;
 import pl.lodz.p.it.spjava.e11.twk.model.Organizator;
@@ -29,20 +23,20 @@ public class AccountProfileDTO {
     private Boolean active;
     private String login;
     private List<Tournament> tournamentList;
-    private List<Administrator> administratorList;
-    private List<Player> playerList;
-    private List<Organizator> organizatorList;
-    private List<AccountData> accountDataList;
+    private Administrator administrator;
+    private Player player;
+    private Organizator organizator;
+    private AccountData accountData;
 
-    public AccountProfileDTO(Long id, Boolean active, String login, List<Tournament> tournamentList, List<Administrator> administratorList, List<Player> playerList, List<Organizator> organizatorList, List<AccountData> accountDataList) {
+    public AccountProfileDTO(Long id, Boolean active, String login, List<Tournament> tournamentList, Administrator administrator, Player player, Organizator organizator, AccountData accountData) {
         this.id = id;
         this.active = active;
         this.login = login;
         this.tournamentList = tournamentList;
-        this.administratorList = administratorList;
-        this.playerList = playerList;
-        this.organizatorList = organizatorList;
-        this.accountDataList = accountDataList;
+        this.administrator = administrator;
+        this.player = player;
+        this.organizator = organizator;
+        this.accountData = accountData;
     }
 
     public Long getId() {
@@ -77,47 +71,47 @@ public class AccountProfileDTO {
         this.tournamentList = tournamentList;
     }
 
-    public List<Administrator> getAdministratorList() {
-        return administratorList;
+    public Administrator getAdministrator() {
+        return administrator;
     }
 
-    public void setAdministratorList(List<Administrator> administratorList) {
-        this.administratorList = administratorList;
+    public void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
     }
 
-    public List<Player> getPlayerList() {
-        return playerList;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public List<Organizator> getOrganizatorList() {
-        return organizatorList;
+    public AccountData getAccountData() {
+        return accountData;
     }
 
-    public void setOrganizatorList(List<Organizator> organizatorList) {
-        this.organizatorList = organizatorList;
+    public void setAccountData(AccountData accountData) {
+        this.accountData = accountData;
     }
 
-    public List<AccountData> getAccountDataList() {
-        return accountDataList;
+    public Organizator getOrganizator() {
+        return organizator;
     }
 
-    public void setAccountDataList(List<AccountData> accountDataList) {
-        this.accountDataList = accountDataList;
+    public void setOrganizator(Organizator organizator) {
+        this.organizator = organizator;
     }
 
     public boolean isAdmin(){
-        return Objects.nonNull(getAdministratorList());
+        return Objects.nonNull(getAdministrator());
     }
     
     public boolean isPlayer(){
-        return Objects.nonNull(getPlayerList());
+        return Objects.nonNull(getPlayer());
     }
     
     public boolean isOgranizator(){
-        return Objects.nonNull(getOrganizatorList());
+        return Objects.nonNull(getOrganizator());
     } 
 }

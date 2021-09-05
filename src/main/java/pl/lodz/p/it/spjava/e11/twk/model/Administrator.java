@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -39,7 +40,7 @@ public class Administrator implements Serializable {
     @Column(name = "VER")
     private BigInteger ver;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @OneToOne
     private Account accountId;
 
     public Administrator() {

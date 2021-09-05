@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -43,7 +44,7 @@ public class Organizator implements Serializable {
     @OneToMany(mappedBy = "organizatorId")
     private List<Tournament> tournamentList;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @OneToOne
     private Account accountId;
 
     public Organizator() {

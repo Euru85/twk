@@ -11,24 +11,24 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.accounts.details']} ${showAccountDetailsPageBean.accountDTO.login}
+                ${msg['menu.accounts.details']} ${showAccountDetailsPageBean.accountProfileDTO.login}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{showAccountDetailsPageBean}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{showAccountDetailsPageBean.accountProfileDTO}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.accountDTO.id}" /> 
+                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.login']} ">
-                                <b:commandButton action="#" look="link" value="#{row.accountDTO.login}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.login}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.accountDataDTO.accountName}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.accountData.accountName}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.admin']} ">
-                                <b:commandButton action="#" look="link" value="#{showAccountDetailsPageBean.admin}" />
+                                <b:commandButton action="#" look="link" value="#{row.isAdmin()}" />
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>

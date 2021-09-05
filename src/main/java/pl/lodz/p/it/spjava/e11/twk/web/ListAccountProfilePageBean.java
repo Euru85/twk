@@ -29,6 +29,15 @@ public class ListAccountProfilePageBean {
     public ListAccountProfilePageBean() {
     }
 
+    public List<AccountProfileDTO> getListAccountProfilesDTO() {
+        return listAccountProfilesDTO;
+    }
+
+    public void setListAccountProfilesDTO(List<AccountProfileDTO> listAccountProfilesDTO) {
+        this.listAccountProfilesDTO = listAccountProfilesDTO;
+    }
+    
+
     public String showAccountDetailsAction(final AccountProfileDTO accountProfileDTO){
        accountController.setSelectedAccountProfileDTO(accountProfileDTO);
         return "goToAccountDetails";
@@ -36,7 +45,7 @@ public class ListAccountProfilePageBean {
        
     @PostConstruct
     private void init(){
-        listAccountProfilesDTO = accountProfileEndpoint.listAllAccountProfiles();
+        listAccountProfilesDTO = accountProfileEndpoint.listAllAccountProfiles();;
     }
     
 }

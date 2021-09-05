@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -48,7 +49,7 @@ public class AccountData implements Serializable {
     @Column(name = "ACCOUNT_NAME")
     private String accountName;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @OneToOne
     private Account accountId;
 
     public AccountData() {
