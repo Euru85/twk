@@ -17,9 +17,10 @@ import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint;
 
 
 
-@Named(value = "leagueDetailsPageBean")
+
+@Named(value = "showLeagueDetailsPageBean")
 @RequestScoped
-public class LeagueDetailsPageBean {
+public class ShowLeagueDetailsPageBean {
 
     @EJB
     private TournamentEndpoint tournamentEndpoint;  
@@ -30,7 +31,7 @@ public class LeagueDetailsPageBean {
     private LeagueController leagueController;
     
 
-    public LeagueDetailsPageBean() {
+    public ShowLeagueDetailsPageBean() {
     }
 
     public LeagueDTO getLeagueDTO() {

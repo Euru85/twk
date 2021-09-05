@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.tournament']}: ${showTournamentDetailsPageBean.getTournamentDTO().getTournamentName()}
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <h:form>
+                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO()}" fixedHeader="true" >
+                            <b:dataTableColumn label="#" content-style="link">
+                                 <b:commandButton action="#" look="link" value="#{row.getId()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.name']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getTournamentName()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.game_system']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getGameSystemId().getSystemName()}" /> 
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                        
+                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO().gettParticipantList()}" fixedHeader="true" >
+                            <b:dataTableColumn label="#" content-style="link">
+                                 <b:commandButton action="#" look="link" value="#{row.getPlayerId().getId()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['player.nick']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getPlayerId().getNick()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['menu.army']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getArmyId().getArmyName()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['player.game_club']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getPlayerId().getGameClub()}" /> 
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </h:form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.tournaments']} 
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <h:form>
+                        <b:dataTable var="row" value="#{listTournamentPageBean.getListTournamentDTO()}" fixedHeader="true" >
+                            <b:dataTableColumn label="#" content-style="link">
+                                 <b:commandButton action="#" look="link" value="#{row.getId()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.name']} ">
+                                <b:commandButton action="#{listTournamentPageBean.showTournamentDetailsAction(row)}" look="link" value="#{row.getTournamentName()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['menu.league']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getLeagueId().getLeagueName()}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['menu.system']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getGameSystemId().getSystemName()}" />
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['ORGANIZER']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getOrganizatorId().getAccountId().getLogin()}" />
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['menu.closed']} ">
+                                <b:commandButton action="#" look="link" value="#{row.getClosed()}" />
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </h:form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

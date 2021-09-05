@@ -11,13 +11,13 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.league']}: ${leagueDetailsPageBean.leagueDTO.leagueName}
+                ${msg['menu.league']}: ${showLeagueDetailsPageBean.leagueDTO.leagueName}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{leagueDetailsPageBean.listTournamentsDTO()}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{showLeagueDetailsPageBean.listTournamentsDTO()}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>

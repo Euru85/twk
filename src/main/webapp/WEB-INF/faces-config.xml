@@ -88,6 +88,18 @@
             <from-outcome>goToLeagueDetails</from-outcome>
             <to-view-id>/league/leagueDetails.xhtml</to-view-id>
             <redirect />
-        </navigation-case>            
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToTournaments</from-outcome>
+            <to-view-id>/tournament/tournaments.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToTournamentDetails</from-outcome>
+            <to-view-id>/tournament/tournamentDetails.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>                  
     </navigation-rule>
 </faces-config>
+
+
