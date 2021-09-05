@@ -8,6 +8,7 @@ import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.Account;
 import pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.AccountData;
 import pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO;
@@ -15,7 +16,10 @@ import pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.Player;
 import pl.lodz.p.it.spjava.e11.twk.model.Administrator;
 import pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade;
+import pl.lodz.p.it.spjava.e11.twk.model.Tournament;
 
 @Stateful
 public class AccountProfileEndpoint {
@@ -28,87 +32,24 @@ public class AccountProfileEndpoint {
     @EJB
     AdministratorFacade adminFacade;
     
-
-       public List<AccountDataDTO> listAllAccountDatas(){
-        List<AccountDataDTO> listAccountDatasDTO = new ArrayList<>();
-        List<AccountData> listAccountDatas = accountDataFacade.findAll();
-        for (AccountData accountData : listAccountDatas){
-            AccountDataDTO accountDataDTO = new AccountDataDTO(accountData.getId(), accountData.getAccountName(), accountData.getSurname() , accountData.getAccountId() );
-            listAccountDatasDTO.add(accountDataDTO);
-        }
-        
-        return listAccountDatasDTO;
-    }
-
-    public List<AccountDTO> listAllAccounts(){
-        List<AccountDTO> listAccountsDTO = new ArrayList<>();
+    public List<AccountProfileDTO> listAllAccountProfiles(){
+        List<AccountProfileDTO> listAccountProfilesDTO = new ArrayList<>();
         List<Account> listAccounts = accountFacade.findAll();
         for (Account account : listAccounts){
-            AccountDTO accountDTO = new AccountDTO(account.getId(), account.getLogin(), account.getActive() );
-            listAccountsDTO.add(accountDTO);
+            AccountProfileDTO accountProfileDTO = new AccountProfileDTO(account.getId(),  account.getActive(), account.getLogin(), account.getTournamentList(),account.getAdministratorList(),account.getPlayerList(), account.getOrganizatorList(), account.getAccountDataList());
+            listAccountProfilesDTO.add(accountProfileDTO);
         }
         
-        return listAccountsDTO;
+        return listAccountProfilesDTO;
     }
     
-    public List<PlayerDTO> listAllPlayers(){
-        List<PlayerDTO> listPlayersDTO = new ArrayList<>();
-        List<Player> listPlayers = playerFacade.findAll();
-        for (Player player : listPlayers){
-            PlayerDTO playerDTO = new PlayerDTO(player.getId(), player.getNick(), player.getGameClub() , player.getAccountId() );
-            listPlayersDTO.add(playerDTO);
+    public List<TournamentDTO> listTournamentsByAccountProfileDTO(AccountProfileDTO accountProfileDTO){
+        List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
+        for (Tournament tournament : accountProfileDTO.getTournamentList()){
+            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList());
+            listTournamentsDTO.add(tournamentDTO);
         }
-        
-        return listPlayersDTO;
-    }
-    
-    public List<AdministratorDTO> listAllAdmins(){
-        List<AdministratorDTO> listAdminsDTO = new ArrayList<>();
-        List<Administrator> listAdmins = adminFacade.findAll();
-        for (Administrator admin : listAdmins){
-            AdministratorDTO adminDTO = new AdministratorDTO(admin.getId(), admin.getAccountId() );
-            listAdminsDTO.add(adminDTO);
-        }
-        
-        return listAdminsDTO;
-    }
-    
-    public AccountDTO getAccountById(Long id){
-        List<AccountDTO> listAccountDTO = listAllAccounts();
-        for (AccountDTO accountDTO : listAccountDTO ){
-            if (accountDTO.getId().equals(id)) return accountDTO;
-        }
-        return null;
-    }
-    
-    public AccountDataDTO listDataByAccountId(Long id){
-        List<AccountDataDTO> listAccountDataDTO = listAllAccountDatas();
-        for (AccountDataDTO accountDataDTO : listAccountDataDTO ){
-            if (accountDataDTO.getId().equals(id)) return accountDataDTO;
-        }
-        return null;
-    }
-    
-    public boolean isAdmin(Long id){  
-        List<AdministratorDTO> listAdminsDTO = listAllAdmins();
-        for (AdministratorDTO adminDTO : listAdminsDTO ){
-            if (adminDTO.getId().equals(id)) return true;
-        }
-        return false;
-    }
-    
-    
-    public PlayerDTO listPlayerByAccountId(Long id){
-        List<PlayerDTO> listPlayersDTO = listAllPlayers();
-        for (PlayerDTO playerDTO : listPlayersDTO ){
-            if (playerDTO.getId().equals(id)) return playerDTO;
-        }
-        return null;
-    }
-    
-    public boolean isPlayer(Long id){  
-        if (Objects.nonNull(listPlayerByAccountId(id)) ) return true;
-        return false;
+        return listTournamentsDTO;
     }
     
 }

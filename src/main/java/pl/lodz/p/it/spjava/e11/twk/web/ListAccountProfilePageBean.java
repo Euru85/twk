@@ -11,11 +11,8 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint;
-import pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO;
-import pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO;
-import pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO;
 
 
 
@@ -25,64 +22,21 @@ public class ListAccountProfilePageBean {
 
     @EJB
     private AccountProfileEndpoint accountProfileEndpoint;
-    private List<AccountDTO> listAccountDTO;
-    private List<AccountDataDTO> listAccountDataDTO;
-    private List<PlayerDTO> listPlayerDTO;
-    private List<AdministratorDTO> listAdminDTO;
+    private List<AccountProfileDTO> listAccountProfilesDTO;
     @Inject
     private AccountController accountController;
 
     public ListAccountProfilePageBean() {
     }
 
-    public List<AccountDTO> getListAccountDTO() {
-        return listAccountDTO;
-    }
-
-    public void setListAccountDTO(List<AccountDTO> listAccountDTO) {
-        this.listAccountDTO = listAccountDTO;
-    }
-    
-    public List<AccountDataDTO> getListAccountDataDTO() {
-        return listAccountDataDTO;
-    }
-
-    public void setListAccountDataDTO(List<AccountDataDTO> listAccountDataDTO) {
-        this.listAccountDataDTO = listAccountDataDTO;
-    }
-    
-    public List<PlayerDTO> getListPlayerDTO() {
-        return listPlayerDTO;
-    }
-
-    public void setListPlayerDTO(List<PlayerDTO> listPlayerDTO) {
-        this.listPlayerDTO = listPlayerDTO;
-    }
-    
-    public List<AdministratorDTO> getListAdminDTO() {
-        return listAdminDTO;
-    }
-
-    public void setListAdminDTO(List<AdministratorDTO> listAdminDTO) {
-        this.listAdminDTO = listAdminDTO;
-    }
-    
-    public boolean isAdmin(Long id){
-        return accountProfileEndpoint.isAdmin(id);
-    } 
-    
-    public String showAccountDetailsAction(final Long id){
-       accountController.setSelectedAccountId(id);
+    public String showAccountDetailsAction(final AccountProfileDTO accountProfileDTO){
+       accountController.setSelectedAccountProfileDTO(accountProfileDTO);
         return "goToAccountDetails";
     }
-    
-    
+       
     @PostConstruct
     private void init(){
-        listAccountDTO = accountProfileEndpoint.listAllAccounts();
-        listAccountDataDTO = accountProfileEndpoint.listAllAccountDatas();
-        listPlayerDTO = accountProfileEndpoint.listAllPlayers();
-        listAdminDTO = accountProfileEndpoint.listAllAdmins();
+        listAccountProfilesDTO = accountProfileEndpoint.listAllAccountProfiles();
     }
     
 }

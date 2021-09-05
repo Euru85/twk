@@ -8,7 +8,7 @@ package pl.lodz.p.it.spjava.e11.twk.web;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO;
 
 
 /**
@@ -19,14 +19,14 @@ import pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO;
 @SessionScoped
 public class AccountController implements Serializable {
 
-    private Long selectedAccountId;
+    private AccountProfileDTO  selectedAccountProfileDTO;
 
-    public Long getSelectedAccountId() {
-        return selectedAccountId;
+    public AccountProfileDTO getSelectedAccountProfileDTO() {
+        return selectedAccountProfileDTO;
     }
 
-    public void setSelectedAccountId(Long selectedAccountId) {
-        this.selectedAccountId = selectedAccountId;
+    public void setSelectedAccountProfileDTO(AccountProfileDTO accountProfileDTO) {
+        this.selectedAccountProfileDTO = accountProfileDTO;
     }
     
     /**
