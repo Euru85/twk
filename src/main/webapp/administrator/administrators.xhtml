@@ -17,12 +17,12 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{listAccountProfilePageBean.listAdminDTO}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{listAccountProfilePageBean.getListAccountAdministratorsDTO()}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.login']} ">
-                                <b:commandButton action="#" look="link" value="#{row.accountId.login}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.login}" /> 
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>

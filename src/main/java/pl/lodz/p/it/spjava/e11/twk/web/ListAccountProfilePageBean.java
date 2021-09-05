@@ -23,6 +23,9 @@ public class ListAccountProfilePageBean {
     @EJB
     private AccountProfileEndpoint accountProfileEndpoint;
     private List<AccountProfileDTO> listAccountProfilesDTO;
+    private List<AccountProfileDTO> listAccountPlayersDTO;
+    private List<AccountProfileDTO> listAccountAdministratorsDTO;
+    
     @Inject
     private AccountController accountController;
 
@@ -42,10 +45,30 @@ public class ListAccountProfilePageBean {
        accountController.setSelectedAccountProfileDTO(accountProfileDTO);
         return "goToAccountDetails";
     }
+
+    public List<AccountProfileDTO> getListAccountPlayersDTO() {
+        return listAccountPlayersDTO;
+    }
+
+    public void setListAccountPlayersDTO(List<AccountProfileDTO> listAccountPlayersDTO) {
+        this.listAccountPlayersDTO = listAccountPlayersDTO;
+    }
+
+    public List<AccountProfileDTO> getListAccountAdministratorsDTO() {
+        return listAccountAdministratorsDTO;
+    }
+
+    public void setListAccountAdministratorsDTO(List<AccountProfileDTO> listAccountAdministratorsDTO) {
+        this.listAccountAdministratorsDTO = listAccountAdministratorsDTO;
+    }
+    
+    
        
     @PostConstruct
     private void init(){
-        listAccountProfilesDTO = accountProfileEndpoint.listAllAccountProfiles();;
+        listAccountProfilesDTO = accountProfileEndpoint.listAllAccountProfiles();
+        listAccountPlayersDTO = accountProfileEndpoint.listAllAccountAdministrators();
+        listAccountAdministratorsDTO = accountProfileEndpoint.listAllAccountPlayers();
     }
     
 }

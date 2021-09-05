@@ -34,6 +34,28 @@ public class AccountProfileEndpoint {
         return listAccountProfilesDTO;
     }
     
+    public List<AccountProfileDTO> listAllAccountPlayers(){
+        List<AccountProfileDTO> listAccountProfilesDTO = new ArrayList<>();
+        List<Account> listAccounts = accountFacade.findAll();
+        for (Account account : listAccounts){
+            AccountProfileDTO accountProfileDTO = new AccountProfileDTO(account.getId(),  account.getActive(), account.getLogin(), account.getTournamentList(),account.getAdministrator(),account.getPlayer(), account.getOrganizator(), account.getAccountData());
+            if(accountProfileDTO.isPlayer()) listAccountProfilesDTO.add(accountProfileDTO);
+        }       
+        return listAccountProfilesDTO;
+    }
+    
+    public List<AccountProfileDTO> listAllAccountAdministrators(){
+        List<AccountProfileDTO> listAccountProfilesDTO = new ArrayList<>();
+        List<Account> listAccounts = accountFacade.findAll();
+        for (Account account : listAccounts){
+            AccountProfileDTO accountProfileDTO = new AccountProfileDTO(account.getId(),  account.getActive(), account.getLogin(), account.getTournamentList(),account.getAdministrator(),account.getPlayer(), account.getOrganizator(), account.getAccountData());
+            if(accountProfileDTO.isAdmin()) listAccountProfilesDTO.add(accountProfileDTO);
+        }
+        
+        return listAccountProfilesDTO;
+    }
+    
+    
     public List<TournamentDTO> listTournamentsByAccountProfileDTO(AccountProfileDTO accountProfileDTO){
         List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
         for (Tournament tournament : accountProfileDTO.getTournamentList()){

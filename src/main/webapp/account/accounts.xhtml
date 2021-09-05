@@ -33,6 +33,9 @@
                             <b:dataTableColumn label="${msg['account.admin']} ">
                                 <b:commandButton action="#" look="link" value="#{row.isAdmin()}" />
                             </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['menu.player']} ">
+                                <b:commandButton action="#" look="link" value="#{row.isPlayer()}" />
+                            </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
                 </b:jumbotron>
