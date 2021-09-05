@@ -26,6 +26,7 @@ public class LeagueDetailsPageBean {
     private LeagueDTO leagueDTO; 
     private List<TournamentDTO> listTournamentDTO;
 
+    
     @Inject
     private LeagueController leagueController;
     

@@ -17,18 +17,18 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{showAccountDetailsPageBean.}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{listAccountProfilePageBean.getListAccountProfilesDTO()}" fixedHeader="true" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.id}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['account.login']} ">
-                                <b:commandButton action="#" look="link" value="#{row.accountId.login}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.login}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['player.nick']} ">
-                                <b:commandButton action="#" look="link" value="#{row.nick}" /> 
+                                <b:commandButton action="#" look="link" value="#{row.player.nick}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['player.game_club']} ">
-                                <b:commandButton action="#" look="link" value="#{row.gameClub}" />
+                                <b:commandButton action="#" look="link" value="#{row.player.gameClub}" />
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
