@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
+import java.util.Date;
 import java.util.List;
 import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 import pl.lodz.p.it.spjava.e11.twk.model.League;
@@ -28,10 +29,11 @@ public class TournamentDTO {
    private GameSystem gameSystemId;
    private League leagueId;
    private Organizator organizatorId;
+   private Date tDate;
    private List<TRound> tRoundList;
    private List<TParticipant> tParticipantList;
 
-    public TournamentDTO(Long id, Boolean closed, Integer currentRound, String description, Integer rounds, String tournamentName, GameSystem gameSystemId, League leagueId, Organizator organizatorId, List<TRound> tRoundList, List<TParticipant> tParticipantList) {
+    public TournamentDTO(Long id, Boolean closed, Integer currentRound, String description, Integer rounds, String tournamentName, GameSystem gameSystemId, League leagueId, Organizator organizatorId, List<TRound> tRoundList, List<TParticipant> tParticipantList, Date tDate) {
         this.id = id;
         this.closed = closed;
         this.currentRound = currentRound;
@@ -43,6 +45,7 @@ public class TournamentDTO {
         this.organizatorId = organizatorId;
         this.tRoundList = tRoundList;
         this.tParticipantList = tParticipantList;
+        this.tDate =  tDate;
     }
 
     public Long getId() {
@@ -131,6 +134,14 @@ public class TournamentDTO {
 
     public void settParticipantList(List<TParticipant> tParticipantList) {
         this.tParticipantList = tParticipantList;
+    }
+
+    public Date gettDate() {
+        return tDate;
+    }
+
+    public void settDate(Date tDate) {
+        this.tDate = tDate;
     }
    
    

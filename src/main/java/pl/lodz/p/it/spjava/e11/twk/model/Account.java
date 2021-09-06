@@ -35,16 +35,19 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Account.findByVer", query = "SELECT a FROM Account a WHERE a.ver = :ver")})
 public class Account implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ACTIVE")
+    private Boolean active;
+    @OneToMany(mappedBy = "accountId")
+    private List<Organizator> organizatorList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ACTIVE")
-    private Boolean active;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -90,13 +93,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     public String getLogin() {
         return login;
@@ -185,6 +181,22 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.spjava.e11.twk.model.Account[ id=" + id + " ]";
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<Organizator> getOrganizatorList() {
+        return organizatorList;
+    }
+
+    public void setOrganizatorList(List<Organizator> organizatorList) {
+        this.organizatorList = organizatorList;
     }
     
 }

@@ -17,19 +17,33 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO()}" fixedHeader="true" searching="false" paginated="false" >
-                            <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.getId()}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['general.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.getTournamentName()}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['general.game_system']} ">
-                                <b:commandButton action="#" look="link" value="#{row.getGameSystemId().getSystemName()}" /> 
-                            </b:dataTableColumn>
-                        </b:dataTable>
-                        
-                        ${msg['player.participants']}
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="9">
+                                <h:outputText value="${msg['general.details']}:"/>
+                                <b:row styleClass="show-grid">
+                                    <b:column col-md="6"><h:outputText value="${msg['general.name']}"/></b:column>
+                                    <b:column col-md="6"><h:outputText value="#{showTournamentDetailsPageBean.getTournamentDTO().getTournamentName()}"/></b:column>
+                                </b:row>
+                                <b:row styleClass="show-grid">
+                                    <b:column col-md="6"><h:outputText value="${msg['general.game_system']}"/></b:column>
+                                    <b:column col-md="6"><h:outputText value="#{showTournamentDetailsPageBean.getTournamentDTO().getGameSystemId().getSystemName()}"/></b:column>
+                                </b:row>
+                                <b:row styleClass="show-grid">
+                                    <b:column col-md="6"><h:outputText value="${msg['general.date']}"/></b:column>
+                                    <b:column col-md="6"><h:outputText value="#{showTournamentDetailsPageBean.getTournamentDTO().gettDate()}"/></b:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="9">
+                                <h:outputText value="${msg['general.description']}:"/>
+                                <b:row styleClass="show-grid">
+                                    <b:column col-md="6"><h:outputText value="#{showTournamentDetailsPageBean.getTournamentDTO().getDescription()}"/></b:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
+                        <br></br>
+                        <b>${msg['player.participants']}:</b>
                         <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO().gettParticipantList()}" fixedHeader="true" searching="false" paginated="false" page-length="120" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.getPlayerId().getId()}" /> 

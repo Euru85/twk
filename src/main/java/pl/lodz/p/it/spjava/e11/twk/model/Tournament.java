@@ -7,6 +7,7 @@ package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -38,16 +41,20 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Tournament.findByVer", query = "SELECT t FROM Tournament t WHERE t.ver = :ver")})
 public class Tournament implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "CLOSED")
+    private Boolean closed;
+    @Column(name = "T_DATE")
+    @Temporal(TemporalType.DATE)
+    private Date tDate;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CLOSED")
-    private Boolean closed;
     @Column(name = "CURRENT_ROUND")
     private Integer currentRound;
     @Size(max = 255)
@@ -100,13 +107,6 @@ public class Tournament implements Serializable {
         this.id = id;
     }
 
-    public Boolean  getClosed() {
-        return closed;
-    }
-
-    public void setClosed(Boolean  closed) {
-        this.closed = closed;
-    }
 
     public Integer getCurrentRound() {
         return currentRound;
@@ -219,6 +219,22 @@ public class Tournament implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.spjava.e11.twk.model.Tournament[ id=" + id + " ]";
+    }
+
+    public Boolean getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Boolean closed) {
+        this.closed = closed;
+    }
+
+    public Date getTDate() {
+        return tDate;
+    }
+
+    public void setTDate(Date tDate) {
+        this.tDate = tDate;
     }
     
 }

@@ -30,7 +30,7 @@ public class TournamentEndpoint {
         List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
         List<Tournament> listTournaments = tournamentFacade.findAll();
         for (Tournament tournament : listTournaments){
-            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList());
+            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList(),tournament.getTDate());
             listTournamentsDTO.add(tournamentDTO);
         }
         return listTournamentsDTO;
@@ -39,7 +39,7 @@ public class TournamentEndpoint {
     public List<TournamentDTO> listTournamentsByLeagueDTO(LeagueDTO leagueDTO){
         List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
         for (Tournament tournament : leagueDTO.getTournamentList()){
-            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList());
+            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList(), tournament.getTDate());
             listTournamentsDTO.add(tournamentDTO);
         }
         return listTournamentsDTO;

@@ -98,7 +98,17 @@
             <from-outcome>goToTournamentDetails</from-outcome>
             <to-view-id>/tournament/tournamentDetails.xhtml</to-view-id>
             <redirect />
-        </navigation-case>                  
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToLogin</from-outcome>
+            <to-view-id>/account/login.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToRegister</from-outcome>
+            <to-view-id>/account/register.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>                       
     </navigation-rule>
 </faces-config>
 

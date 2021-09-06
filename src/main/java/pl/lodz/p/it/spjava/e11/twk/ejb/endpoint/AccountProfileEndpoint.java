@@ -59,7 +59,7 @@ public class AccountProfileEndpoint {
     public List<TournamentDTO> listTournamentsByAccountProfileDTO(AccountProfileDTO accountProfileDTO){
         List<TournamentDTO> listTournamentsDTO = new ArrayList<>();
         for (Tournament tournament : accountProfileDTO.getTournamentList()){
-            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList());
+            TournamentDTO tournamentDTO = new TournamentDTO(tournament.getId(),tournament.getClosed(), tournament.getCurrentRound(),tournament.getDescription(),tournament.getRounds(), tournament.getTournamentName(), tournament.getGameSystemId(),tournament.getLeagueId(),tournament.getOrganizatorId(),tournament.getTRoundList(), tournament.getTParticipantList(),tournament.getTDate());
             listTournamentsDTO.add(tournamentDTO);
         }
         return listTournamentsDTO;
