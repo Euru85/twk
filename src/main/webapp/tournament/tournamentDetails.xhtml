@@ -17,7 +17,7 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO()}" fixedHeader="true" >
+                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO()}" fixedHeader="true" searching="false" paginated="false" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.getId()}" /> 
                             </b:dataTableColumn>
@@ -29,7 +29,8 @@
                             </b:dataTableColumn>
                         </b:dataTable>
                         
-                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO().gettParticipantList()}" fixedHeader="true" >
+                        ${msg['player.participants']}
+                        <b:dataTable var="row" value="#{showTournamentDetailsPageBean.getTournamentDTO().gettParticipantList()}" fixedHeader="true" searching="false" paginated="false" page-length="120" >
                             <b:dataTableColumn label="#" content-style="link">
                                  <b:commandButton action="#" look="link" value="#{row.getPlayerId().getId()}" /> 
                             </b:dataTableColumn>
