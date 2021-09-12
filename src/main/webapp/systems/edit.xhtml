@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.systems']} 
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <h:form>
+                        <b:dataTable var="row" value="#{listGameSystemPageBean.getListGameSystemDTO()}" fixedHeader="true" >
+                            <b:dataTableColumn label="#" content-style="link">
+                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.name']} ">
+                                <b:commandButton action="#" look="link" value="#{row.gameSystemName}" /> 
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </h:form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
