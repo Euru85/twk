@@ -7,10 +7,17 @@ package pl.lodz.p.it.spjava.e11.twk.ejb.endpoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
+import pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager;
+import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
+import pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException;
 import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 
 
@@ -23,6 +30,11 @@ public class GameSystemEndpoint {
     
     @EJB
     GameSystemFacade gameSystemFacade;
+    GameSystemManager gameSystemManager;
+    GameSystem gameSystem;
+    
+    @Resource(name = "txRetryLimit")
+    private int txRetryLimit;
 
     public List<GameSystemDTO> listAllGameSystems(){
         List<GameSystemDTO> listGameSystemsDTO = new ArrayList<>();
@@ -34,4 +46,55 @@ public class GameSystemEndpoint {
         
         return listGameSystemsDTO;
     }
+    
+    public void deleteGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
+       
+        boolean rollbackTX;
+        int retryTXCounter = txRetryLimit;
+
+        do {
+            try {
+     
+                gameSystemManager.deleteGameSystem(gameSystemDTO.getId());
+                rollbackTX = gameSystemManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+            }
+
+        } while (rollbackTX && --retryTXCounter > 0);
+
+        if (rollbackTX && retryTXCounter == 0) {
+            throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
+        }
+    }
+    
+    public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
+        gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
+        gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
+        boolean rollbackTX;
+        int retryTXCounter = txRetryLimit;
+
+        do {
+            try {
+     
+                gameSystemManager.updateGameSystem(gameSystem);
+                rollbackTX = gameSystemManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+            }
+
+        } while (rollbackTX && --retryTXCounter > 0);
+
+        if (rollbackTX && retryTXCounter == 0) {
+            throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
+        }
+        gameSystem=null;
+    }
+    
 }

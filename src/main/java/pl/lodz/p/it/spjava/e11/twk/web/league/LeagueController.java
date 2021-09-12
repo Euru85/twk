@@ -3,7 +3,7 @@
  * To change this template file, choose Accounts | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.spjava.e11.twk.web;
+package pl.lodz.p.it.spjava.e11.twk.web.league;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

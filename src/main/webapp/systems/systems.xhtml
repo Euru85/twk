@@ -24,6 +24,14 @@
                             <b:dataTableColumn label="${msg['general.name']} ">
                                 <b:commandButton action="#" look="link" value="#{row.gameSystemName}" /> 
                             </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.actions']} ">
+                                <b:commandButton action="#{listGameSystemPageBean.editGameSystemAction(row)}" look="link">
+                                     <b:iconAwesome name="cog" tooltip="${msg['action.edit']}" /> ${msg['action.edit']}
+                                </b:commandButton>
+                                <b:commandButton action="#{listGameSystemPageBean.deleteGameSystemAction(row)}" look="link">
+                                     <b:iconAwesome name="remove" tooltip="${msg['action.delete']}" /> ${msg['action.delete']}
+                                </b:commandButton>
+                            </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
                 </b:jumbotron>

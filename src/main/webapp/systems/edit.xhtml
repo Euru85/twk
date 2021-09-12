@@ -11,20 +11,16 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.systems']} 
+                ${msg['menu.system']} 
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{listGameSystemPageBean.getListGameSystemDTO()}" fixedHeader="true" >
-                            <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['general.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.gameSystemName}" /> 
-                            </b:dataTableColumn>
-                        </b:dataTable>
+                        Czy usunac konto?
+                        ${deleteGameSystemPageBean.gameSystemDTO.gameSystemName}
+                        <b:commandButton value="yes" ajax="true" update="@none" look="success" style="width:80px"/>
+                        <b:commandButton value="no" ajax="true" update="@none" look="danger" style="width:80px"/>
                     </h:form>
                 </b:jumbotron>
             </ui:define>

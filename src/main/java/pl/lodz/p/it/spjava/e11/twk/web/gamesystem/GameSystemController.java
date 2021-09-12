@@ -3,37 +3,38 @@
  * To change this template file, choose Accounts | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.spjava.e11.twk.web;
-
+package pl.lodz.p.it.spjava.e11.twk.web.gamesystem;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
+import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 
 
 /**
  *
  * @author student
  */
-@Named(value = "LeagueController")
+@Named(value = "GameSystemController")
 @SessionScoped
-public class LeagueController implements Serializable {
+public class GameSystemController implements Serializable {
 
-    private LeagueDTO selectedLeagueDTO;
+    private GameSystemDTO selectedGameSystemDTO;
 
-    public LeagueDTO getSelectedLeagueDTO() {
-        return selectedLeagueDTO;
+    public GameSystemDTO getSelectedGameSystemDTO() {
+        return selectedGameSystemDTO;
     }
 
-    public void setSelectedLeagueDTO(LeagueDTO selectedLeagueDTO ) {
-        this.selectedLeagueDTO = selectedLeagueDTO;
+    public void setSelectedGameSystemDTO(GameSystemDTO selectedGameSystemDTO ) {
+        this.selectedGameSystemDTO = selectedGameSystemDTO;
     }
     
     /**
      * Creates a new instance of AccountController
      */
-    public LeagueController() {
+    public GameSystemController() {
     }
+    
+    
     
     
 }

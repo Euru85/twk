@@ -5,7 +5,6 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.web.gamesystem;
 
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -13,40 +12,36 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint;
+import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 
 
 
-@Named(value = "listGameSystemPageBean")
+@Named(value = "deleteGameSystemPageBean")
 @RequestScoped
-public class ListGameSystemPageBean {
-
+public class DeleteGameSystemPagePean {
+    
     @EJB
     private GameSystemEndpoint gameSystemEndpoint;
-    private List<GameSystemDTO> listGameSystemDTO;
+    private GameSystemDTO gameSystemDTO;
+    
     @Inject
     private GameSystemController gameSystemController;
-    
-    public ListGameSystemPageBean() {
-    }
 
-    public List<GameSystemDTO> getListGameSystemDTO() {
-        return listGameSystemDTO;
-    }
-
-    public String editGameSystemAction(GameSystemDTO gameSystemDTO){
-        gameSystemController.setSelectedGameSystemDTO(gameSystemDTO);
-        return "goToEditGameSystem";
+    public DeleteGameSystemPagePean() {
     }
     
-    public String deleteGameSystemAction(GameSystemDTO gameSystemDTO){
-        gameSystemController.setSelectedGameSystemDTO(gameSystemDTO);
-        return "goToDeleteGameSystem";
+    public GameSystemDTO getGameSystemDTO() {
+        gameSystemDTO = gameSystemController.getSelectedGameSystemDTO();
+        return gameSystemDTO;
     }
     
+    public String deleteGameSystem(boolean decision)throws AppBaseException{
+        if (decision)gameSystemEndpoint.deleteGameSystem(gameSystemDTO);
+        return "goToSystems";
+    }
     
     @PostConstruct
     private void init(){
-        listGameSystemDTO = gameSystemEndpoint.listAllGameSystems();
+        gameSystemDTO = gameSystemController.getSelectedGameSystemDTO();
     }
-    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.spjava.e11.twk.web;
+package pl.lodz.p.it.spjava.e11.twk.web.tournament;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;

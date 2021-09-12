@@ -108,8 +108,16 @@
             <from-outcome>goToRegister</from-outcome>
             <to-view-id>/account/register.xhtml</to-view-id>
             <redirect />
-        </navigation-case>                       
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToEditGameSystem</from-outcome>
+            <to-view-id>/systems/edit.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToDeleteGameSystem</from-outcome>
+            <to-view-id>/systems/delete.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>                             
     </navigation-rule>
 </faces-config>
-
-

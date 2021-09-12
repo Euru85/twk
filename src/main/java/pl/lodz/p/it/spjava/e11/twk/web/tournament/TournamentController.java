@@ -3,7 +3,7 @@
  * To change this template file, choose Accounts | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.spjava.e11.twk.web;
+package pl.lodz.p.it.spjava.e11.twk.web.tournament;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -15,7 +15,7 @@ import pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO;
  *
  * @author student
  */
-@Named(value = "TournamentController")
+@Named(value = "tournamentController")
 @SessionScoped
 public class TournamentController implements Serializable {
 
