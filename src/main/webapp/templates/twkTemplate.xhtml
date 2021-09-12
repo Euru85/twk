@@ -36,10 +36,10 @@
                         <b:navLink value="#{contextUtils.userName}" rendered="#{not empty request.remoteUser}"></b:navLink>
                         <b:dropMenu value="${msg['menu.account']}" rendered="#{not empty request.remoteUser}">
                             <b:navLink value="${msg['menu.accounts.changePassword']}" outcome="goToRegister" rendered="#{not empty request.remoteUser}"></b:navLink>
-                            <b:navLink value="${msg['menu.accounts.details']}" outcome="goToAccount" rendered="#{not empty request.remoteUser}"></b:navLink>
+                            <b:navLink value="${msg['menu.accounts.details']}" outcome="#{listAccountProfilePageBean.showCurrentAccountDetailsAction()}" rendered="#{not empty request.remoteUser}"></b:navLink>
                         </b:dropMenu>
-                        <b:navLink value="${msg['menu.authenticate']}" outcome="goToLogin" ></b:navLink>
-                        <b:navLink action="#{contextUtils.invalidateSession()}" value="${msg['menu.closeSession']}" rendered="#{not empty request.remoteUser}"></b:navLink>
+                        <b:navLink value="${msg['menu.authenticate']}" outcome="goToLogin" rendered="#{empty request.remoteUser}"></b:navLink>
+                        <b:navLink onclick="#{contextUtils.invalidateSession()}"  value="${msg['menu.closeSession']}" rendered="#{not empty request.remoteUser}" auto-update="true"></b:navLink>
                         <b:navLink value="" outcome=""></b:navLink>
                     </b:navbarLinks>
                 </b:navBar>

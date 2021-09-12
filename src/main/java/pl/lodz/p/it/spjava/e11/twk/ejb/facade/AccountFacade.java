@@ -53,6 +53,19 @@ public class AccountFacade extends AbstractFacade<Account> {
         super(Account.class);
     }
     
+    @RolesAllowed({"Player", "Organizator", "Administrator"})
+    public Account findLogin(String login) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> query = cb.createQuery(Account.class);
+        Root<Account> from = query.from(Account.class);
+        query = query.select(from);
+        query = query.where(cb.equal(from.get(Account_.login), login)); //Przykład wskazania atrybutu encji poprzez klasę metamodelu
+        TypedQuery<Account> tq = em.createQuery(query);
+
+        return tq.getSingleResult();
+    }
+    
+    
     @ExcludeClassInterceptors //Nie chcemy ujawniać w dziennikach skrótu hasła
     @RolesAllowed("AUTHENTICATOR") //"Zwykłe" role nie mają tu dostępu. Musi pośredniczyć odpowiedni endpoint opisany jako @RunAs("AUTHENTICATOR").
     public Account findLoginAndHash(String login, String hash){

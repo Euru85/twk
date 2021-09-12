@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateful;
@@ -47,14 +48,14 @@ public class GameSystemEndpoint {
         return listGameSystemsDTO;
     }
     
+    @RolesAllowed({"Administrator"})
     public void deleteGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
        
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
 
         do {
-            try {
-     
+            try {   
                 gameSystemManager.deleteGameSystem(gameSystemDTO.getId());
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
@@ -71,6 +72,7 @@ public class GameSystemEndpoint {
         }
     }
     
+    @RolesAllowed({"Administrator"})
     public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
         gameSystem.setSystemName(gameSystemDTO.getGameSystemName());

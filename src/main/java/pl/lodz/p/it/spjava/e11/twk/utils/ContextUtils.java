@@ -85,7 +85,7 @@ public class ContextUtils {
          * UWAGA: integracja logowania typu BASIC z przeglądarką powoduje, że czasem mimo to "wylogowanie" jest nieskuteczne - 
          * powstaje nowa sesja już zalogowanego użytkownika. Dlatego bezpieczniej jest stosować uwierzytelnianie przez formularz (FORM).
          */
-        return "main";
+        return "goToMainPage";
 
     }
     /**

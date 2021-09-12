@@ -1,7 +1,10 @@
 package pl.lodz.p.it.spjava.e11.twk.ejb.endpoint;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade;
 import pl.lodz.p.it.spjava.e11.twk.model.Account;
@@ -22,6 +25,9 @@ public class AccountProfileEndpoint {
     PlayerFacade playerFacade;
     @EJB
     AdministratorFacade adminFacade;
+    
+    @Resource
+    protected SessionContext sctx;
     
     public List<AccountProfileDTO> listAllAccountProfiles(){
         List<AccountProfileDTO> listAccountProfilesDTO = new ArrayList<>();
@@ -65,4 +71,16 @@ public class AccountProfileEndpoint {
         return listTournamentsDTO;
     }
    
+    
+    @RolesAllowed({"Player", "Organizator", "Administrator"})
+    public String getCurrentLogin() throws IllegalStateException {
+        return sctx.getCallerPrincipal().getName();
+    }
+    
+    @RolesAllowed({"Player", "Organizator", "Administrator"})
+    public AccountProfileDTO getCurrentAccountDTO(){
+      Account account = accountFacade.findLogin(getCurrentLogin());
+      AccountProfileDTO accountProfileDTO = new AccountProfileDTO(account.getId(),  account.getActive(), account.getLogin(), account.getTournamentList(),account.getAdministrator(),account.getPlayer(), account.getOrganizator(), account.getAccountData());
+      return accountProfileDTO;
+    }
 }

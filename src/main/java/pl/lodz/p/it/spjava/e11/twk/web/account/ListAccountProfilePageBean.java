@@ -40,9 +40,17 @@ public class ListAccountProfilePageBean {
         this.listAccountProfilesDTO = listAccountProfilesDTO;
     }
     
+    public AccountProfileDTO getCurrentAccount() {
+        return accountProfileEndpoint.getCurrentAccountDTO();
+    }
 
     public String showAccountDetailsAction(final AccountProfileDTO accountProfileDTO){
        accountController.setSelectedAccountProfileDTO(accountProfileDTO);
+        return "goToAccountDetails";
+    }
+    
+    public String showCurrentAccountDetailsAction(){
+       accountController.setSelectedAccountProfileDTO(getCurrentAccount());
         return "goToAccountDetails";
     }
 
@@ -62,7 +70,8 @@ public class ListAccountProfilePageBean {
         this.listAccountAdministratorsDTO = listAccountAdministratorsDTO;
     }
     
-    
+
+      
        
     @PostConstruct
     private void init(){

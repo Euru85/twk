@@ -7,7 +7,9 @@ package pl.lodz.p.it.spjava.e11.twk.web.account;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -25,6 +27,8 @@ public class ShowAccountDetailsPageBean {
     
     @Inject
     private AccountController accountController;
+    
+
 
     public ShowAccountDetailsPageBean() {
     }
@@ -38,6 +42,7 @@ public class ShowAccountDetailsPageBean {
         listTournamentDTO = accountProfileEndpoint.listTournamentsByAccountProfileDTO(accountController.getSelectedAccountProfileDTO());
         return listTournamentDTO;
     }
+    
   
    @PostConstruct
     private void init(){
