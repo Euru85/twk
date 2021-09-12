@@ -14,6 +14,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateful;
+import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager;
@@ -29,8 +30,9 @@ import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 @Stateful
 public class GameSystemEndpoint {
     
-    @EJB
+    @Inject
     GameSystemFacade gameSystemFacade;
+    @Inject
     GameSystemManager gameSystemManager;
     GameSystem gameSystem;
     

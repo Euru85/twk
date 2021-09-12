@@ -42,8 +42,8 @@
                                     </b:column>
                                 </b:row>
                                 <b:row styleClass="show-grid">
-                                    <b:commandButton action="#{deleteGameSystemPageBean.deleteGameSystem(true)}" value="${msg['action.confirm']}" ajax="true" update="@none" look="success" style="width:150px"/>
-                                    <b:commandButton action="#{deleteGameSystemPageBean.deleteGameSystem(false)}"  value="${msg['action.cancel']}" ajax="true" update="@none" look="danger" style="width:150px"/>
+                                    <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(true)}" value="${msg['action.confirm']}" ajax="true" update="@none" look="success" style="width:150px"/>
+                                    <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(false)}"  value="${msg['action.cancel']}" ajax="true" update="@none" look="danger" style="width:150px"/>
                                 </b:row>    
                             </b:column>
                         </b:row>
