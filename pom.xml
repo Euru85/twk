@@ -4,7 +4,7 @@
 
     <groupId>pl.lodz.p.it.spjava.e11</groupId>
     <artifactId>TabletopWargamesKeeper</artifactId>
-    <version>0.15-SNAPSHOT</version>
+    <version>0.49-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>TabletopWargamesKeeper ${project.version} </name>
@@ -74,6 +74,11 @@
             <artifactId>javaee-web-api</artifactId>
             <version>8.0.1</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.soteria</groupId>
+            <artifactId>javax.security.enterprise</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

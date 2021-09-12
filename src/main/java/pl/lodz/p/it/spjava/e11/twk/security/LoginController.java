@@ -81,6 +81,7 @@ public class LoginController {
 
     // Hasło jest od razu zamieniane na skrót, który posłuży do jego porównania z hasłem zapisanym także jako skrót w bazie
     public void setPassword(String password) {
-        this.password = hashGenerator.generateHash(password);
+        //this.password = hashGenerator.generateHash(password);
+        this.password = password;
     }
 }

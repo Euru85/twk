@@ -1,14 +1,11 @@
 package pl.lodz.p.it.spjava.e11.twk.security;
 
-import java.util.Arrays;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
@@ -46,6 +43,9 @@ public class JpaIdentityStore implements IdentityStore {
             return (null != account ? new CredentialValidationResult(account.getLogin(), groups) : CredentialValidationResult.INVALID_RESULT);
         }
         return CredentialValidationResult.NOT_VALIDATED_RESULT;
-    }
 
+    }
+    
+    
+   
 }
