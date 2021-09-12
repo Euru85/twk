@@ -11,16 +11,42 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.system']} 
+                ${msg['menu.system']} ${editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        Czy usunac konto?
-                        ${deleteGameSystemPageBean.gameSystemDTO.gameSystemName}
-                        <b:commandButton value="yes" ajax="true" update="@none" look="success" style="width:80px"/>
-                        <b:commandButton value="no" ajax="true" update="@none" look="danger" style="width:80px"/>
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="9">
+                                <b:row>
+                                    <b:column medium-screen="2">
+                                        <h:outputText value="${msg['general.name']}" /> 
+                                    </b:column>
+                                    <b:column medium-screen="4">
+                                        <h:outputText value="${msg['general.current.value']}" />
+                                    </b:column>
+                                    <b:column medium-screen="6">
+                                        <h:outputText value="${msg['general.new.value']}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="2">
+                                        <h:outputText value="${msg['systems.name']}" /> 
+                                    </b:column>
+                                    <b:column medium-screen="4">
+                                        <h:outputText value="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}" /> 
+                                    </b:column>
+                                    <b:column medium-screen="6">
+                                        <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="label"/> 
+                                    </b:column>
+                                </b:row>
+                                <b:row styleClass="show-grid">
+                                    <b:commandButton action="#{deleteGameSystemPageBean.deleteGameSystem(true)}" value="${msg['action.confirm']}" ajax="true" update="@none" look="success" style="width:150px"/>
+                                    <b:commandButton action="#{deleteGameSystemPageBean.deleteGameSystem(false)}"  value="${msg['action.cancel']}" ajax="true" update="@none" look="danger" style="width:150px"/>
+                                </b:row>    
+                            </b:column>
+                        </b:row>
                     </h:form>
                 </b:jumbotron>
             </ui:define>

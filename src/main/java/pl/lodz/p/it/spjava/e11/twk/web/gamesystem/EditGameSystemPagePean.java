@@ -16,7 +16,7 @@ import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 
 
 
-@Named(value = "deleteGameSystemPageBean")
+@Named(value = "editGameSystemPageBean")
 @RequestScoped
 public class EditGameSystemPagePean {
     
