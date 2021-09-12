@@ -23,7 +23,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/main/index.xhtml</welcome-file>
     </welcome-file-list>
     
     <security-role>
@@ -48,9 +48,9 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>Klient</role-name>
+            <role-name>Player</role-name>
             <role-name>Administrator</role-name>
-            <role-name>Pracownik</role-name>
+            <role-name>Organizator</role-name>
         </auth-constraint>
     </security-constraint>
     
@@ -63,7 +63,7 @@
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>Klient</role-name>
+            <role-name>Organizator</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -106,15 +106,6 @@
         </user-data-constraint>
     </security-constraint>
     
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <realm-name>twkJDBCRealm</realm-name>
-        <form-login-config>
-            <form-login-page>/faces/login/login.xhtml</form-login-page>
-            <form-error-page>/faces/login/loginError.xhtml</form-error-page>
-        </form-login-config>
-    </login-config>
-
     <error-page>
         <error-code>403</error-code>
         <location>/faces/error/error403.xhtml</location>   

@@ -1,21 +1,26 @@
 package pl.lodz.p.it.spjava.e11.twk.security;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletException;
+import javax.security.enterprise.AuthenticationStatus;
+import javax.security.enterprise.SecurityContext;
+import static javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
+import javax.security.enterprise.credential.Credential;
+import javax.security.enterprise.credential.Password;
+import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
-
+/**
+ *
+ * @author Marcin Kwapisz
+ */
 @Named
 @RequestScoped
 public class LoginController {
-    
-    @Inject
-    private HttpServletRequest request;
 
     @NotNull
     private String username;
@@ -23,22 +28,45 @@ public class LoginController {
     @NotNull
     private String password;
 
-     /**
-     * Dokonuje programowo uwierzytelnienia na podstawie loginu i hasła.
-     * Dane pochodzą z formularza uwierzytelniania.
-     * Dzięki samodzielnemu wywoływaniu login() można przechwycić wyjątek który jest rzucany w przypadku niepoprawnego uwierzytelnienia.
-     * Można to wykorzystać np. do blokowania konta po pewnej liczbie nieudanych prób.
+    @Inject
+    private SecurityContext securityContext;
+
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private HashGenerator hashGenerator;
+
+    /**
+     * Dokonuje programowo uwierzytelnienia na podstawie loginu i hasła. Dane
+     * pochodzą z formularza uwierzytelniania. Dzięki samodzielnemu wywoływaniu
+     * login() można przechwycić wyjątek który jest rzucany w przypadku
+     * niepoprawnego uwierzytelnienia. Można to wykorzystać np. do blokowania
+     * konta po pewnej liczbie nieudanych prób.
      */
     public String login() {
-        try {
-            request.login(username, password);
-        } catch (ServletException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        Credential credential = new UsernamePasswordCredential(username, new Password(password));
+        AuthenticationStatus status = securityContext.authenticate(getRequest(), getResponse(), withParams().credential(credential));
+        if (status.equals(AuthenticationStatus.SEND_CONTINUE)) {
+            facesContext.responseComplete();
+            return "";
+        } else if (status.equals(AuthenticationStatus.SEND_FAILURE)) {
             return "loginError";
         }
-        return "main";
+        return "goToMainPage";
     }
 
+    private HttpServletResponse getResponse() {
+        return (HttpServletResponse) facesContext.getExternalContext().getResponse();
+    }
+
+    private HttpServletRequest getRequest() {
+        return (HttpServletRequest) facesContext.getExternalContext().getRequest();
+    }
+
+//    private void addError(FacesContext context, String message) {
+//        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+//    }
     public String getUsername() {
         return username;
     }
@@ -51,7 +79,8 @@ public class LoginController {
         return password;
     }
 
+    // Hasło jest od razu zamieniane na skrót, który posłuży do jego porównania z hasłem zapisanym także jako skrót w bazie
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashGenerator.generateHash(password);
     }
 }

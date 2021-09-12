@@ -6,7 +6,6 @@
 package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
