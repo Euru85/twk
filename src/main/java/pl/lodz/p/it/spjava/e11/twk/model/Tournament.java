@@ -6,7 +6,6 @@
 package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -21,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -68,7 +68,8 @@ public class Tournament implements Serializable {
     @Column(name = "TOURNAMENT_NAME")
     private String tournamentName;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @JoinColumn(name = "LAST_MODIFIED_BY_ID", referencedColumnName = "ID")
     @ManyToOne
     private Account lastModifiedById;
@@ -138,14 +139,6 @@ public class Tournament implements Serializable {
 
     public void setTournamentName(String tournamentName) {
         this.tournamentName = tournamentName;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public Account getLastModifiedById() {

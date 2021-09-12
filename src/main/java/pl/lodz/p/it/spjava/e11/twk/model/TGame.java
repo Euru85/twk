@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -55,7 +56,8 @@ public class TGame implements Serializable {
     @Column(name = "SCORE_B_SMALL")
     private Integer scoreBSmall;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @JoinColumn(name = "PLAYERB", referencedColumnName = "ID")
     @ManyToOne
     private TParticipant playerb;
@@ -129,13 +131,6 @@ public class TGame implements Serializable {
         this.scoreBSmall = scoreBSmall;
     }
 
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
-    }
 
     public TParticipant getPlayerb() {
         return playerb;

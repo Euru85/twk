@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -44,7 +45,8 @@ public class AccountData implements Serializable {
     @Column(name = "SURNAME")
     private String surname;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @Size(max = 64)
     @Column(name = "ACCOUNT_NAME")
     private String accountName;
@@ -73,14 +75,6 @@ public class AccountData implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public String getAccountName() {

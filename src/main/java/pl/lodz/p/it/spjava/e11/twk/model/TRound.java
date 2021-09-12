@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -43,7 +44,8 @@ public class TRound implements Serializable {
     @Column(name = "CLOSED")
     private Short closed;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @Column(name = "ROUND_NUMBER")
     private BigInteger roundNumber;
     @OneToMany(mappedBy = "roundId")
@@ -73,14 +75,6 @@ public class TRound implements Serializable {
 
     public void setClosed(Short closed) {
         this.closed = closed;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public BigInteger getRoundNumber() {

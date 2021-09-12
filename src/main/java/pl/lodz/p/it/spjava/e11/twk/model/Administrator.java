@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -38,7 +39,8 @@ public class Administrator implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     @OneToOne
     private Account accountId;
@@ -56,14 +58,6 @@ public class Administrator implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public Account getAccountId() {

@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -46,7 +47,8 @@ public class Army implements Serializable {
     @Column(name = "ARMY_NAME")
     private String armyName;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @OneToMany(mappedBy = "armyId")
     private List<TParticipant> tParticipantList;
 
@@ -76,14 +78,6 @@ public class Army implements Serializable {
 
     public void setArmyName(String armyName) {
         this.armyName = armyName;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<TParticipant> getTParticipantList() {

@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -46,7 +47,8 @@ public class League implements Serializable {
     @Column(name = "LEAGUE_NAME")
     private String leagueName;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @OneToMany(mappedBy = "leagueId")
     private List<Tournament> tournamentList;
     @JoinColumn(name = "GAME_SYSTEM_ID", referencedColumnName = "ID")
@@ -79,14 +81,6 @@ public class League implements Serializable {
 
     public void setLeagueName(String leagueName) {
         this.leagueName = leagueName;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

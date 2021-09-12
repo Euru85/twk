@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -44,7 +45,8 @@ public class GameSystem implements Serializable {
     @Column(name = "SYSTEM_NAME")
     private String systemName;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @OneToMany(mappedBy = "gameSystemId")
     private List<Tournament> tournamentList;
     @OneToMany(mappedBy = "gameSystemId")
@@ -76,14 +78,6 @@ public class GameSystem implements Serializable {
 
     public void setSystemName(String systemName) {
         this.systemName = systemName;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

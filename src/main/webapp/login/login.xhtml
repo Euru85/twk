@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">>
+    
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.authenticate']} 
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <form jsf:id="form">
+                        <p><strong>${msg['account.login']} </strong><input jsf:id="username" type="text" jsf:value="#{loginController.username}" /></p>
+                        <p><strong>${msg['account.password']} </strong><input jsf:id="password" type="password" jsf:value="#{loginController.password}" /></p>
+                        <p><input type="submit" value="${msg['action.login']}" jsf:action="#{loginController.login()}" /></p>
+                    </form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -39,7 +40,8 @@ public class TParticipant implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @OneToMany(mappedBy = "playerb")
     private List<TGame> tGameList;
     @OneToMany(mappedBy = "playera")
@@ -69,14 +71,6 @@ public class TParticipant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<TGame> getTGameList() {

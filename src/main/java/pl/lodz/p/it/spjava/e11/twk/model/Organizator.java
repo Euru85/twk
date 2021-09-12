@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -39,7 +40,8 @@ public class Organizator implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @OneToMany(mappedBy = "organizatorId")
     private List<Tournament> tournamentList;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
@@ -59,14 +61,6 @@ public class Organizator implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public List<Tournament> getTournamentList() {

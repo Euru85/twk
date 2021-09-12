@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -49,7 +50,8 @@ public class Player implements Serializable {
     @Column(name = "NICK")
     private String nick;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ID")
     @OneToOne
     private Account accountId;
@@ -87,13 +89,6 @@ public class Player implements Serializable {
         this.nick = nick;
     }
 
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
-    }
 
     public Account getAccountId() {
         return accountId;

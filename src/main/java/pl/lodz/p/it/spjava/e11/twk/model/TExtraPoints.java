@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,7 +38,8 @@ public class TExtraPoints implements Serializable {
     @Column(name = "ID")
     private Long id;
     @Column(name = "VER")
-    private BigInteger ver;
+    @Version
+    private Long ver;
     @JoinColumn(name = "PARTICIPANT_ID", referencedColumnName = "ID")
     @ManyToOne
     private TParticipant participantId;
@@ -55,14 +57,6 @@ public class TExtraPoints implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public BigInteger getVer() {
-        return ver;
-    }
-
-    public void setVer(BigInteger ver) {
-        this.ver = ver;
     }
 
     public TParticipant getParticipantId() {
