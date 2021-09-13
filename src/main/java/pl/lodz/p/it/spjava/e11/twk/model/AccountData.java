@@ -42,7 +42,7 @@ public class AccountData implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Size(max = 255)
     @Column(name = "SURNAME")

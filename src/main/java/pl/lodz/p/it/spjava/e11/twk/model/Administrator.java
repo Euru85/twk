@@ -39,7 +39,7 @@ public class Administrator implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(name = "VER")
     @Version
