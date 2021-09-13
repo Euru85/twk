@@ -118,6 +118,11 @@
             <from-outcome>goToDeleteGameSystem</from-outcome>
             <to-view-id>/systems/delete.xhtml</to-view-id>
             <redirect />
-        </navigation-case>                             
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToAddNewSystem</from-outcome>
+            <to-view-id>/systems/add.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>                               
     </navigation-rule>
 </faces-config>

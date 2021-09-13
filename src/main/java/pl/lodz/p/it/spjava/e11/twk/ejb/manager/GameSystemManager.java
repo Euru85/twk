@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.ejb.manager;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -31,15 +32,17 @@ public class GameSystemManager extends AbstractManager implements SessionSynchro
     @Inject
     private GameSystemFacade gameSystemFacade;
     
-    public void createGameSystem (Long id)throws AppBaseException {
-        GameSystem gameSystem = gameSystemFacade.find(id);
+    @RolesAllowed({"Administrator"})
+    public void createGameSystem (GameSystem gameSystem)throws AppBaseException {
         gameSystemFacade.create(gameSystem);
     }
     
+    @RolesAllowed({"Administrator"})
     public void updateGameSystem (GameSystem gameSystem)throws AppBaseException {
         gameSystemFacade.edit(gameSystem);
     }
     
+    @RolesAllowed({"Administrator"})
     public void deleteGameSystem(Long id)throws AppBaseException {
         GameSystem gameSystem = gameSystemFacade.find(id);
         gameSystemFacade.remove(gameSystem);

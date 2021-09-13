@@ -101,4 +101,31 @@ public class GameSystemEndpoint {
         gameSystem=null;
     }
     
+    @RolesAllowed({"Administrator"})
+    public void createGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
+        GameSystem newGameSystem = new GameSystem();
+        newGameSystem.setSystemName(gameSystemDTO.getGameSystemName());
+        boolean rollbackTX;
+        int retryTXCounter = txRetryLimit;
+
+        do {
+            try {
+     
+                gameSystemManager.createGameSystem(newGameSystem);
+                rollbackTX = gameSystemManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+            }
+
+        } while (rollbackTX && --retryTXCounter > 0);
+
+        if (rollbackTX && retryTXCounter == 0) {
+            throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
+        }
+        gameSystem=null;
+    }
+    
 }

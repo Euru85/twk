@@ -43,6 +43,9 @@ public class ListGameSystemPageBean {
         return "goToDeleteGameSystem";
     }
     
+    public String createGameSystemAction(){
+        return "goToAddGameSystem";
+    }
     
     @PostConstruct
     private void init(){
