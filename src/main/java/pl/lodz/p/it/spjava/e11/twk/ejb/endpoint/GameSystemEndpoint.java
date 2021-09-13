@@ -84,7 +84,7 @@ public class GameSystemEndpoint {
         do {
             try {
      
-                gameSystemManager.updateGameSystem(gameSystem);
+                gameSystemManager.updateGameSystem(gameSystem.getId());
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
