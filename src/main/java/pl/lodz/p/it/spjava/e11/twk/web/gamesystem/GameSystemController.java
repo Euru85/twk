@@ -50,16 +50,16 @@ public class GameSystemController implements Serializable {
             createGameSystemDTO = gameSystemDTO;
             gameSystemEndpoint.createGameSystem(createGameSystemDTO);
             createGameSystemDTO  = null;
-            return "success";
+            return "goToSystems";
         } catch (GameSystemException ke) {
             if (GameSystemException.KEY_DB_CONSTRAINT.equals(ke.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_DB_CONSTRAINT); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_DB_CONSTRAINT); 
             } else {
-                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzPracownika wyjatku: ", ke);
+                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku: ", ke);
             }
             return null;
         } catch (AppBaseException abe) {
-            Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzPracownika wyjatku typu: ", abe.getClass());
+            Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
                 ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
             }

@@ -104,6 +104,10 @@ public class TRound implements Serializable {
         this.tournamentId = tournamentId;
     }
 
+    public Long getVer() {
+        return ver;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

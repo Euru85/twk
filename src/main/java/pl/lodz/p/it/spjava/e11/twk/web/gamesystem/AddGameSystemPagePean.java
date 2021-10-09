@@ -5,7 +5,7 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.web.gamesystem;
 
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -15,13 +15,10 @@ import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 
 
-
 @Named(value = "addGameSystemPageBean")
 @RequestScoped
 public class AddGameSystemPagePean {
     
-    @EJB
-    private GameSystemEndpoint gameSystemEndpoint;
     private GameSystemDTO gameSystemDTO = new GameSystemDTO();
     
     @Inject
@@ -35,12 +32,7 @@ public class AddGameSystemPagePean {
     }
     
     public String createGameSystem(boolean decision)throws AppBaseException{
-        if (decision)gameSystemController.createGameSystem(gameSystemDTO);
+        if (decision) return gameSystemController.createGameSystem(gameSystemDTO);
         return "goToSystems";
-    }
-    
-    @PostConstruct
-    private void init(){
-        gameSystemDTO =  new GameSystemDTO();
     }
 }

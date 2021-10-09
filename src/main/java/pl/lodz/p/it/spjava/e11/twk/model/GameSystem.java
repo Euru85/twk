@@ -6,7 +6,6 @@
 package pl.lodz.p.it.spjava.e11.twk.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -44,8 +43,8 @@ public class GameSystem implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "SYSTEM_NAME")
+    @Size(min=3,max=32)
+    @Column(name = "SYSTEM_NAME",length = 32, nullable = false, unique = true)
     private String systemName;
     @Column(name = "VER")
     @Version

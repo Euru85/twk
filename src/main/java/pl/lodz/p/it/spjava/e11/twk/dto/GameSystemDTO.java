@@ -5,6 +5,10 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author Adam
@@ -12,6 +16,8 @@ package pl.lodz.p.it.spjava.e11.twk.dto;
 public class GameSystemDTO {
 
     private Long id;
+    @NotNull(message="{javax.validation.constraints.NotNull.message}")
+    @Size(min=3,max=32,message="{constraint.string.length.notinrange}")
     private String gameSystemName;
 
     public GameSystemDTO() {

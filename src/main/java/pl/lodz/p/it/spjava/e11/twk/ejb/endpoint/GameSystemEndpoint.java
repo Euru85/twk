@@ -13,10 +13,15 @@ import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
+import pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 import pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException;
@@ -28,12 +33,16 @@ import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
  * @author Adam
  */
 @Stateful
+@LocalBean
+@Interceptors(LoggingInterceptor.class)
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class GameSystemEndpoint {
     
     @Inject
     GameSystemFacade gameSystemFacade;
     @Inject
     GameSystemManager gameSystemManager;
+    
     GameSystem gameSystem;
     
     @Resource(name = "txRetryLimit")
@@ -51,6 +60,7 @@ public class GameSystemEndpoint {
     }
     
     @RolesAllowed({"Administrator"})
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     public void deleteGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
        
         boolean rollbackTX;
@@ -75,6 +85,7 @@ public class GameSystemEndpoint {
     }
     
     @RolesAllowed({"Administrator"})
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
         gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
@@ -98,10 +109,11 @@ public class GameSystemEndpoint {
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
         }
-        gameSystem=null;
+       // gameSystem=null;
     }
     
     @RolesAllowed({"Administrator"})
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     public void createGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         GameSystem newGameSystem = new GameSystem();
         newGameSystem.setSystemName(gameSystemDTO.getGameSystemName());
@@ -125,7 +137,7 @@ public class GameSystemEndpoint {
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
         }
-        gameSystem=null;
+       //+ gameSystem=null;
     }
     
 }

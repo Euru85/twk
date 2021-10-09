@@ -1,0 +1,425 @@
+@startuml
+abstract class pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+abstract class pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+abstract class pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+class java.io.IOException
+class java.lang.Exception
+class java.math.BigInteger
+class java.nio.charset.StandardCharsets
+class java.security.MessageDigest
+class java.security.NoSuchAlgorithmException
+class java.security.Principal
+class java.util.ArrayList
+class java.util.Date
+class java.util.HashSet
+class java.util.List
+class java.util.Objects
+class java.util.ResourceBundle
+class java.util.Set
+class java.util.concurrent.ThreadLocalRandom
+class java.util.logging.Level
+class java.util.logging.Logger
+class javax.ejb.EJBException
+class javax.ejb.EJBTransactionRolledbackException
+class javax.ejb.SessionContext
+class javax.ejb.TransactionAttributeType
+class javax.faces.application.FacesMessage
+class javax.faces.context.ExternalContext
+class javax.faces.context.FacesContext
+class javax.interceptor.InvocationContext
+class javax.persistence.EntityManager
+class javax.persistence.GenerationType
+class javax.persistence.NoResultException
+class javax.persistence.NonUniqueResultException
+class javax.persistence.OptimisticLockException
+class javax.persistence.TemporalType
+class javax.persistence.TypedQuery
+class javax.persistence.criteria.CriteriaBuilder
+class javax.persistence.criteria.CriteriaQuery
+class javax.persistence.criteria.Predicate
+class javax.persistence.criteria.Root
+class javax.security.enterprise.AuthenticationStatus
+class javax.security.enterprise.SecurityContext
+class javax.security.enterprise.authentication.mechanism.http.AuthenticationParameters
+class javax.security.enterprise.credential.Credential
+class javax.security.enterprise.credential.Password
+class javax.security.enterprise.credential.UsernamePasswordCredential
+class javax.security.enterprise.identitystore.CredentialValidationResult
+class javax.servlet.http.HttpServletRequest
+class javax.servlet.http.HttpServletResponse
+class javax.servlet.http.HttpSession
+class pl.lodz.p.it.spjava.e11.twk.dto.AccountDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.ArmyDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO
+class pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+class pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint
+class pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint
+class pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+class pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint
+class pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.OrganizatorFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.TExtraPointsFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.TGameFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.TParticipantFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.TRoundFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade
+class pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+class pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager
+class pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager
+class pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager
+class pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager
+class pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager
+class pl.lodz.p.it.spjava.e11.twk.exception.AccountException
+class pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException
+class pl.lodz.p.it.spjava.e11.twk.model.Account
+class pl.lodz.p.it.spjava.e11.twk.model.AccountData
+class pl.lodz.p.it.spjava.e11.twk.model.Account_
+class pl.lodz.p.it.spjava.e11.twk.model.Administrator
+class pl.lodz.p.it.spjava.e11.twk.model.Army
+class pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+class pl.lodz.p.it.spjava.e11.twk.model.League
+class pl.lodz.p.it.spjava.e11.twk.model.Organizator
+class pl.lodz.p.it.spjava.e11.twk.model.Player
+class pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints
+class pl.lodz.p.it.spjava.e11.twk.model.TGame
+class pl.lodz.p.it.spjava.e11.twk.model.TParticipant
+class pl.lodz.p.it.spjava.e11.twk.model.TRound
+class pl.lodz.p.it.spjava.e11.twk.model.Tournament
+class pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore
+class pl.lodz.p.it.spjava.e11.twk.security.LoginController
+class pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator
+class pl.lodz.p.it.spjava.e11.twk.security.SecurityAppConfig
+class pl.lodz.p.it.spjava.e11.twk.security.SecurityEndpoint
+class pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils
+class pl.lodz.p.it.spjava.e11.twk.web.account.AccountController
+class pl.lodz.p.it.spjava.e11.twk.web.account.ListAccountProfilePageBean
+class pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.army.ListArmyPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.gamesystem.AddGameSystemPagePean
+class pl.lodz.p.it.spjava.e11.twk.web.gamesystem.DeleteGameSystemPagePean
+class pl.lodz.p.it.spjava.e11.twk.web.gamesystem.EditGameSystemPagePean
+class pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController
+class pl.lodz.p.it.spjava.e11.twk.web.gamesystem.ListGameSystemPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.league.LeagueController
+class pl.lodz.p.it.spjava.e11.twk.web.league.ListLeaguePageBean
+class pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.tournament.ListTournamentsPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.tournament.ShowTournamentDetailsPageBean
+class pl.lodz.p.it.spjava.e11.twk.web.tournament.TournamentController
+interface java.io.Serializable
+interface javax.ejb.SessionSynchronization
+interface javax.security.enterprise.identitystore.IdentityStore
+interface pl.lodz.p.it.spjava.e11.twk.security.HashGenerator
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager ..> java.util.concurrent.ThreadLocalRandom
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager ..> javax.ejb.EJBException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager ..> javax.ejb.SessionContext
+pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException --|> java.lang.Exception
+pl.lodz.p.it.spjava.e11.twk.dto.AccountDataDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> java.util.Objects
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> pl.lodz.p.it.spjava.e11.twk.model.AccountData
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Administrator
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Organizator
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Player
+pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.dto.AdministratorDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.dto.PlayerDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> java.util.Date
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> pl.lodz.p.it.spjava.e11.twk.model.League
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> pl.lodz.p.it.spjava.e11.twk.model.Organizator
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> pl.lodz.p.it.spjava.e11.twk.model.TParticipant
+pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO ..> pl.lodz.p.it.spjava.e11.twk.model.TRound
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> java.util.ArrayList
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> javax.ejb.SessionContext
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint ..> java.util.ArrayList
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.ArmyDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.Army
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> java.util.ArrayList
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> javax.ejb.EJBTransactionRolledbackException
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> java.util.ArrayList
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.League
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> java.util.ArrayList
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade ..> pl.lodz.p.it.spjava.e11.twk.model.AccountData
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.NoResultException
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.NonUniqueResultException
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.TypedQuery
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.criteria.CriteriaBuilder
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.criteria.CriteriaQuery
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.criteria.Predicate
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> javax.persistence.criteria.Root
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Account_
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Administrator
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Army
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade ..> pl.lodz.p.it.spjava.e11.twk.model.League
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.OrganizatorFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.OrganizatorFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.OrganizatorFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Organizator
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Player
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TExtraPointsFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TExtraPointsFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TExtraPointsFacade ..> pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TGameFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TGameFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TGameFacade ..> pl.lodz.p.it.spjava.e11.twk.model.TGame
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TParticipantFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TParticipantFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TParticipantFacade ..> pl.lodz.p.it.spjava.e11.twk.model.TParticipant
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TRoundFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TRoundFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TRoundFacade ..> pl.lodz.p.it.spjava.e11.twk.model.TRound
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade --|> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AbstractFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade ..> javax.persistence.EntityManager
+pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor ..> javax.ejb.SessionContext
+pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor ..> javax.interceptor.InvocationContext
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager --|> pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountDataFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AdministratorFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.OrganizatorFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.PlayerFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.AccountProfileManager --|> javax.ejb.SessionSynchronization
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager --|> pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.ArmyFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager ..> pl.lodz.p.it.spjava.e11.twk.model.Army
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.ArmyManager --|> javax.ejb.SessionSynchronization
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager --|> pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.GameSystemManager --|> javax.ejb.SessionSynchronization
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager --|> pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.LeagueFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager ..> pl.lodz.p.it.spjava.e11.twk.model.League
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.LeagueManager --|> javax.ejb.SessionSynchronization
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager --|> pl.lodz.p.it.spjava.e11.twk.ejb.manager.AbstractManager
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.TournamentFacade
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager ..> pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager ..> pl.lodz.p.it.spjava.e11.twk.model.Tournament
+pl.lodz.p.it.spjava.e11.twk.ejb.manager.TournamentManager --|> javax.ejb.SessionSynchronization
+pl.lodz.p.it.spjava.e11.twk.exception.AccountException --|> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.exception.AccountException ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException --|> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException ..> javax.persistence.OptimisticLockException
+pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException ..> pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+pl.lodz.p.it.spjava.e11.twk.model.Account ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.Account ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Account --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.AccountData ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.AccountData ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.AccountData --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.Administrator ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.Administrator ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Administrator --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.Army ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.Army ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.Army ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Army --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.GameSystem ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.GameSystem ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.GameSystem ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.GameSystem --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.League ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.League ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.League ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.League --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.Organizator ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.Organizator ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.Organizator ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Organizator --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.Player ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.Player ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.Player ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Player --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.TGame ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.TGame ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.TGame --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.TParticipant ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.TParticipant ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.TParticipant ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.TParticipant --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.TRound ..> java.math.BigInteger
+pl.lodz.p.it.spjava.e11.twk.model.TRound ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.TRound ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.TRound --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.model.Tournament ..> java.util.Date
+pl.lodz.p.it.spjava.e11.twk.model.Tournament ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.model.Tournament ..> javax.persistence.GenerationType
+pl.lodz.p.it.spjava.e11.twk.model.Tournament ..> javax.persistence.TemporalType
+pl.lodz.p.it.spjava.e11.twk.model.Tournament --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> java.util.HashSet
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> java.util.Set
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> javax.security.enterprise.credential.Credential
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> javax.security.enterprise.credential.UsernamePasswordCredential
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> javax.security.enterprise.identitystore.CredentialValidationResult
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.security.JpaIdentityStore --|> javax.security.enterprise.identitystore.IdentityStore
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.faces.context.FacesContext
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.security.enterprise.AuthenticationStatus
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.security.enterprise.SecurityContext
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.security.enterprise.credential.Credential
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.security.enterprise.credential.Password
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.security.enterprise.credential.UsernamePasswordCredential
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.servlet.http.HttpServletRequest
+pl.lodz.p.it.spjava.e11.twk.security.LoginController ..> javax.servlet.http.HttpServletResponse
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator ..> java.nio.charset.StandardCharsets
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator ..> java.security.MessageDigest
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator ..> java.security.NoSuchAlgorithmException
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.security.SHA256HashGenerator --|> pl.lodz.p.it.spjava.e11.twk.security.HashGenerator
+pl.lodz.p.it.spjava.e11.twk.security.SecurityEndpoint ..> javax.ejb.TransactionAttributeType
+pl.lodz.p.it.spjava.e11.twk.security.SecurityEndpoint ..> pl.lodz.p.it.spjava.e11.twk.ejb.facade.AccountFacade
+pl.lodz.p.it.spjava.e11.twk.security.SecurityEndpoint ..> pl.lodz.p.it.spjava.e11.twk.model.Account
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> java.io.IOException
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> java.security.Principal
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> java.util.ResourceBundle
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> javax.faces.application.FacesMessage
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> javax.faces.context.ExternalContext
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> javax.faces.context.FacesContext
+pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils ..> javax.servlet.http.HttpSession
+pl.lodz.p.it.spjava.e11.twk.web.account.AccountController ..> pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO
+pl.lodz.p.it.spjava.e11.twk.web.account.AccountController --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.web.account.ListAccountProfilePageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.account.ListAccountProfilePageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO
+pl.lodz.p.it.spjava.e11.twk.web.account.ListAccountProfilePageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean ..> javax.ejb.SessionContext
+pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.AccountProfileDTO
+pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.web.account.ShowAccountDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.AccountProfileEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.army.ListArmyPageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.army.ListArmyPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.ArmyDTO
+pl.lodz.p.it.spjava.e11.twk.web.army.ListArmyPageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.ArmyEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.AddGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.AddGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.AddGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.DeleteGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.DeleteGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.DeleteGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.EditGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.EditGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.EditGameSystemPagePean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> java.util.logging.Level
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> java.util.logging.Logger
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController ..> pl.lodz.p.it.spjava.e11.twk.utils.ContextUtils
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.ListGameSystemPageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.ListGameSystemPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO
+pl.lodz.p.it.spjava.e11.twk.web.gamesystem.ListGameSystemPageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.league.LeagueController ..> pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+pl.lodz.p.it.spjava.e11.twk.web.league.LeagueController --|> java.io.Serializable
+pl.lodz.p.it.spjava.e11.twk.web.league.ListLeaguePageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.league.ListLeaguePageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+pl.lodz.p.it.spjava.e11.twk.web.league.ListLeaguePageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.LeagueEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO
+pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.league.ShowLeagueDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.web.league.LeagueController
+pl.lodz.p.it.spjava.e11.twk.web.tournament.ListTournamentsPageBean ..> java.util.List
+pl.lodz.p.it.spjava.e11.twk.web.tournament.ListTournamentsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.web.tournament.ListTournamentsPageBean ..> pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.TournamentEndpoint
+pl.lodz.p.it.spjava.e11.twk.web.tournament.ListTournamentsPageBean ..> pl.lodz.p.it.spjava.e11.twk.web.tournament.TournamentController
+pl.lodz.p.it.spjava.e11.twk.web.tournament.ShowTournamentDetailsPageBean ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.web.tournament.TournamentController ..> pl.lodz.p.it.spjava.e11.twk.dto.TournamentDTO
+pl.lodz.p.it.spjava.e11.twk.web.tournament.TournamentController --|> java.io.Serializable
+@enduml

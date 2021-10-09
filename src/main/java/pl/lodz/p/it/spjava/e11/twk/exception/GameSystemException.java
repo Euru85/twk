@@ -12,7 +12,6 @@ public class GameSystemException extends AppBaseException {
 
     static final public String KEY_OPTIMISTIC_LOCK = "error.gameSystem.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.gameSystem.db.constraint";
-    static final public String KEY_INSUFFICIENT_PROCDUCT_AMOUNT = "error.gameSystem.insufficient.product.amount";
     static final public String KEY_APROVE_OF_APROVED = "error.gameSystem.aprove.of.aproved";
     static final public String KEY_NO_STATE_IN_EJB_ENDPOINT = "error.gameSystem.no.state.in.ejb.endpoint";
     static final public String KEY_NOT_FOUND = "error.gameSystem.not.found";
@@ -52,11 +51,6 @@ public class GameSystemException extends AppBaseException {
         return ze;
     }
 
-    static public GameSystemException createGameSystemExceptionWithInsufficientProductAmount(GameSystem gameSystem) {
-        GameSystemException ze = new GameSystemException(KEY_INSUFFICIENT_PROCDUCT_AMOUNT);
-        ze.setGameSystem(gameSystem);
-        return ze;
-    }
 
     static public GameSystemException createGameSystemExceptionWithAproveOfAproved(GameSystem gameSystem) {
         GameSystemException ze = new GameSystemException(KEY_APROVE_OF_APROVED);

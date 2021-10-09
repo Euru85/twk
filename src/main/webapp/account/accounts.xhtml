@@ -36,6 +36,9 @@
                             <b:dataTableColumn label="${msg['menu.player']} ">
                                 <b:commandButton action="#" look="link" value="#{row.isPlayer()}" />
                             </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['account.active']} ">
+                                <b:commandButton action="#" look="link" value="#{row.active}" />
+                            </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
                 </b:jumbotron>

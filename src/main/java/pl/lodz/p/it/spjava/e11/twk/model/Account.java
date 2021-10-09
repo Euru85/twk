@@ -53,8 +53,8 @@ public class Account implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "LOGIN")
+    @Size(min = 1, max = 32)
+    @Column(name = "LOGIN" ,length = 32, nullable = false, unique = true, updatable = false)
     private String login;
     @Basic(optional = false)
     @NotNull

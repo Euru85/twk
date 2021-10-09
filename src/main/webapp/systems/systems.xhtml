@@ -21,9 +21,6 @@
                             <b:commandButton action="goToAddNewSystem" value="${msg['system.new']}" look="success">
                         </b:commandButton></b:well>
                         <b:dataTable var="row" value="#{listGameSystemPageBean.getListGameSystemDTO()}" fixedHeader="true" >
-                            <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
-                            </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.name']} ">
                                 <b:commandButton action="#" look="link" value="#{row.gameSystemName}" /> 
                             </b:dataTableColumn>

@@ -1,0 +1,15 @@
+@startuml
+class pl.lodz.p.it.spjava.e11.twk.model.Account
+class pl.lodz.p.it.spjava.e11.twk.model.AccountData
+class pl.lodz.p.it.spjava.e11.twk.model.Administrator
+class pl.lodz.p.it.spjava.e11.twk.model.Army
+class pl.lodz.p.it.spjava.e11.twk.model.GameSystem
+class pl.lodz.p.it.spjava.e11.twk.model.League
+class pl.lodz.p.it.spjava.e11.twk.model.Organizator
+class pl.lodz.p.it.spjava.e11.twk.model.Player
+class pl.lodz.p.it.spjava.e11.twk.model.TExtraPoints
+class pl.lodz.p.it.spjava.e11.twk.model.TGame
+class pl.lodz.p.it.spjava.e11.twk.model.TParticipant
+class pl.lodz.p.it.spjava.e11.twk.model.TRound
+class pl.lodz.p.it.spjava.e11.twk.model.Tournament
+@enduml
