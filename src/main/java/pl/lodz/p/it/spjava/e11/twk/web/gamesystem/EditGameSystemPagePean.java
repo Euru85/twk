@@ -36,12 +36,8 @@ public class EditGameSystemPagePean {
     }
     
     public String saveGameSystem(boolean decision)throws AppBaseException{
-        if (decision)gameSystemEndpoint.updateGameSystem(gameSystemDTO);
+        if (decision) gameSystemEndpoint.updateGameSystem(gameSystemDTO);
         return "goToSystems";
     }
     
-    @PostConstruct
-    private void init(){
-        gameSystemDTO = gameSystemController.getSelectedGameSystemDTO();
-    }
 }

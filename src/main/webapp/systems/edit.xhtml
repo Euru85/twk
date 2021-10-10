@@ -20,30 +20,37 @@
                         <b:row styleClass="show-grid">
                             <b:column col-md="9">
                                 <b:row>
-                                    <b:column medium-screen="2">
+                                    <b:column medium-screen="3">
                                         <h:outputText value="${msg['general.name']}" /> 
                                     </b:column>
-                                    <b:column medium-screen="4">
+                                    <b:column medium-screen="3">
                                         <h:outputText value="${msg['general.current.value']}" />
                                     </b:column>
-                                    <b:column medium-screen="6">
+                                    <b:column medium-screen="3">
                                         <h:outputText value="${msg['general.new.value']}"/>
                                     </b:column>
                                 </b:row>
                                 <b:row>
-                                    <b:column medium-screen="2">
+                                    <b:column medium-screen="3">
                                         <h:outputText value="${msg['systems.name']}" /> 
                                     </b:column>
-                                    <b:column medium-screen="4">
+                                    <b:column medium-screen="3">
                                         <h:outputText value="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}" /> 
                                     </b:column>
-                                    <b:column medium-screen="6">
+                                    <b:column medium-screen="3">
                                         <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="label"/> 
+                                    </b:column>
+                                    <b:column medium-screen="3">
+                                        <b:message for="label" />
                                     </b:column>
                                 </b:row>
                                 <b:row styleClass="show-grid">
-                                    <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(true)}" value="${msg['action.confirm']}" ajax="true" update="@none" look="success" style="width:150px"/>
-                                    <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(false)}"  value="${msg['action.cancel']}" ajax="true" update="@none" look="danger" style="width:150px"/>
+                                    <b:column medium-screen="6">
+                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(false)}"  value="${msg['action.cancel']}" immediate="true" update="@none" look="danger" style="width:150px"/>
+                                    </b:column>
+                                    <b:column medium-screen="3">
+                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(true)}" value="${msg['action.confirm']}"  update="@form" look="success" style="width:150px"/>
+                                    </b:column>
                                 </b:row>    
                             </b:column>
                         </b:row>

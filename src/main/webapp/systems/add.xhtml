@@ -41,7 +41,7 @@
                                 </b:row>
                                 <b:row styleClass="show-grid">
                                     <b:column medium-screen="3">
-                                        <b:commandButton action="#{addGameSystemPageBean.createGameSystem(false)}"  value="${msg['action.cancel']}"  update="@form"  look="danger" style="width:150px"/>
+                                        <b:commandButton action="#{addGameSystemPageBean.createGameSystem(false)}"  value="${msg['action.cancel']}" immediate="true"  update="@none"  look="danger" style="width:150px"/>
                                         <b:message for="@previous" />
                                     </b:column>    
                                     <b:column medium-screen="3">

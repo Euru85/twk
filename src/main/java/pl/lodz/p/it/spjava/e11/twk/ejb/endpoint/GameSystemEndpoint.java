@@ -52,7 +52,7 @@ public class GameSystemEndpoint {
         List<GameSystemDTO> listGameSystemsDTO = new ArrayList<>();
         List<GameSystem> listGameSystems = gameSystemFacade.findAll();
         for (GameSystem gameSystem : listGameSystems){
-            GameSystemDTO gameSystemDTO = new GameSystemDTO(gameSystem.getId(), gameSystem.getSystemName());
+            GameSystemDTO gameSystemDTO = new GameSystemDTO(gameSystem.getId(), gameSystem.getSystemName(),gameSystem.getTournamentList(),gameSystem.getLeagueList());
             listGameSystemsDTO.add(gameSystemDTO);
         }
         
@@ -85,7 +85,6 @@ public class GameSystemEndpoint {
     }
     
     @RolesAllowed({"Administrator"})
-    @TransactionAttribute(TransactionAttributeType.NEVER)
     public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
         gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
@@ -109,7 +108,7 @@ public class GameSystemEndpoint {
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
         }
-       // gameSystem=null;
+       gameSystem=null;
     }
     
     @RolesAllowed({"Administrator"})
@@ -137,7 +136,7 @@ public class GameSystemEndpoint {
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
         }
-       //+ gameSystem=null;
+       gameSystem=null;
     }
     
 }

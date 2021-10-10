@@ -25,8 +25,8 @@
                                 <b:commandButton action="#" look="link" value="#{row.gameSystemName}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.actions']} ">
-                                <b:commandButton action="#{listGameSystemPageBean.editGameSystemAction(row)}" look="link">
-                                     <b:iconAwesome name="cog" tooltip="${msg['action.edit']}" /> ${msg['action.edit']}
+                                <b:commandButton action="#{listGameSystemPageBean.editGameSystemAction(row)}" look="link" rendered="#{row.removable}">
+                                    <b:iconAwesome name="cog" tooltip="${msg['action.edit']}"  rendered="#{row.removable}"/> ${msg['action.edit']}
                                 </b:commandButton>
                                 <b:commandButton action="#{listGameSystemPageBean.deleteGameSystemAction(row)}" look="link">
                                      <b:iconAwesome name="remove" tooltip="${msg['action.delete']}" /> ${msg['action.delete']}
