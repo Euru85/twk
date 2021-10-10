@@ -19,6 +19,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor;
@@ -88,6 +89,7 @@ public class GameSystemEndpoint {
     public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
         gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
+        
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
 

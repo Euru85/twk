@@ -6,6 +6,7 @@
 package pl.lodz.p.it.spjava.e11.twk.ejb.manager;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJBException;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -33,7 +34,7 @@ public class GameSystemManager extends AbstractManager implements SessionSynchro
     private GameSystemFacade gameSystemFacade;
     
     @RolesAllowed({"Administrator"})
-    public void createGameSystem (GameSystem gameSystem)throws AppBaseException {
+    public void createGameSystem (GameSystem gameSystem)throws AppBaseException,EJBException {
         gameSystemFacade.create(gameSystem);
     }
     

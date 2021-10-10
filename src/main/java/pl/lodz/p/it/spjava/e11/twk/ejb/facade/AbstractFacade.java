@@ -7,6 +7,7 @@ package pl.lodz.p.it.spjava.e11.twk.ejb.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 
 /**
  *
@@ -22,15 +23,15 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
+    public void create(T entity)throws AppBaseException {
         getEntityManager().persist(entity);
     }
 
-    public void edit(T entity) {
+    public void edit(T entity)throws AppBaseException {
         getEntityManager().merge(entity);
     }
 
-    public void remove(T entity) {
+    public void remove(T entity)throws AppBaseException {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 

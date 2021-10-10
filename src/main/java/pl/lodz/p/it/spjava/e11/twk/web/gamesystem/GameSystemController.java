@@ -39,9 +39,6 @@ public class GameSystemController implements Serializable {
         this.selectedGameSystemDTO = selectedGameSystemDTO;
     }
     
-    /**
-     * Creates a new instance of AccountController
-     */
     public GameSystemController() {
     }
     
@@ -51,11 +48,11 @@ public class GameSystemController implements Serializable {
             gameSystemEndpoint.createGameSystem(createGameSystemDTO);
             createGameSystemDTO  = null;
             return "goToSystems";
-        } catch (GameSystemException ke) {
-            if (GameSystemException.KEY_DB_CONSTRAINT.equals(ke.getMessage())) {
+        } catch (GameSystemException gse) {
+            if (GameSystemException.KEY_DB_CONSTRAINT.equals(gse.getMessage())) {
                 ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_DB_CONSTRAINT); 
             } else {
-                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku: ", ke);
+                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku: ", gse);
             }
             return null;
         } catch (AppBaseException abe) {
