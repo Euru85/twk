@@ -9,7 +9,7 @@ import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
  */
 public class GameSystemException extends AppBaseException {
 
-    static final public String KEY_DB_CONSTRAINT = "error.gameSystem.db.constraint.uniq.login";
+    static final public String KEY_DB_CONSTRAINT = "error.db.constraint.uniq.name";
     static final public String KEY_OPTIMISTIC_LOCK = "error.gameSystem.optimisticlock";
 
     private GameSystemException(String message) {

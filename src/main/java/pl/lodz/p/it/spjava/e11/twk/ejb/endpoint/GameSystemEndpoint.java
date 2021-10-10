@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
@@ -126,11 +127,12 @@ public class GameSystemEndpoint {
      
                 gameSystemManager.createGameSystem(newGameSystem);
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBaseException | EJBException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
+                throw GameSystemException.createWithDbCheckConstraintKey(gameSystem, ex);
             }
 
         } while (rollbackTX && --retryTXCounter > 0);
