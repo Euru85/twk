@@ -64,6 +64,50 @@ public class GameSystemController implements Serializable {
         }
     }
     
+    public String editGameSystem(GameSystemDTO gameSystemDTO) {
+        try {
+            gameSystemEndpoint.editGameSystem(gameSystemDTO);
+            return "goToSystems";
+        } catch (GameSystemException gse) {
+            if (GameSystemException.KEY_DB_CONSTRAINT.equals(gse.getMessage())) {
+                ContextUtils.emitInternationalizedMessage("editGameSystem:name", GameSystemException.KEY_DB_CONSTRAINT); 
+            } else {
+                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji editGameSystem wyjatku: ", gse);
+            }
+            return null;
+        } catch (AppBaseException abe) {
+            Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji editGameSystem wyjatku typu: ", abe.getClass());
+            if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+            }
+            return null;
+        }
+    }
     
+    public String deleteGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
+        try {
+            gameSystemEndpoint.deleteGameSystem(gameSystemDTO);
+            return "goToSystems";
+        } catch (GameSystemException ce) {
+            if (GameSystemException.KEY_GAME_SYSTEM_ALREADY_CHANGED.equals(ce.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_GAME_SYSTEM_ALREADY_CHANGED);
+            } else if (GameSystemException.KEY_GAME_SYSTEM_NOT_FOUND.equals(ce.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_GAME_SYSTEM_NOT_FOUND);
+            } else if (GameSystemException.KEY_GAME_SYSTEM_OPTIMISTIC_LOCK.equals(ce.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_GAME_SYSTEM_OPTIMISTIC_LOCK);
+            } else {
+                Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE,
+                        "Zgłoszenie w metodzie akcji deleteGameSystem wyjatku: ", ce);
+            }
+            return null;
+        } catch (AppBaseException abe) {
+            Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE,
+                    "Zgłoszenie w metodzie akcji deleteGameSystem wyjatku typu: ", abe.getClass());
+            if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            }
+            return null;
+        }
+    }    
     
 }

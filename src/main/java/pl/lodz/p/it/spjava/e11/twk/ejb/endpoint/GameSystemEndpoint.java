@@ -72,6 +72,8 @@ public class GameSystemEndpoint {
             try {   
                 gameSystemManager.deleteGameSystem(gameSystemDTO.getId());
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
+            } catch(GameSystemException gse){
+                throw gse;
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
@@ -87,26 +89,30 @@ public class GameSystemEndpoint {
     }
     
     @RolesAllowed({"Administrator"})
-    public void updateGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
+    public void editGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
         gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
         gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
         
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
-
-        do {
-            try {
+        try{
+            do {
+                try {
      
-                gameSystemManager.updateGameSystem(gameSystem.getId());
+                gameSystemManager.editGameSystem(gameSystem.getId());
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                } catch(GameSystemException gse){
+                    throw gse;
+                } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                    Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
-            }
-
-        } while (rollbackTX && --retryTXCounter > 0);
+                }
+            } while (rollbackTX && --retryTXCounter > 0);
+        } catch (DatabaseException ex){
+            throw GameSystemException.createWithDbCheckConstraintKey(gameSystem, ex);
+        }
 
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();

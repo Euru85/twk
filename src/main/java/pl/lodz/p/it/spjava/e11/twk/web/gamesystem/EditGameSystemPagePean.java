@@ -36,7 +36,7 @@ public class EditGameSystemPagePean {
     }
     
     public String saveGameSystem(boolean decision)throws AppBaseException{
-        if (decision) gameSystemEndpoint.updateGameSystem(gameSystemDTO);
+        if (decision) gameSystemController.editGameSystem(gameSystemDTO);
         return "goToSystems";
     }
     

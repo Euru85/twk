@@ -16,7 +16,7 @@
 
             <ui:define name="content">
                 <b:jumbotron>
-                    <h:form>
+                    <h:form id="editGameSystem">
                         <b:row styleClass="show-grid">
                             <b:column col-md="9">
                                 <b:row>
@@ -38,10 +38,10 @@
                                         <h:outputText value="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}" /> 
                                     </b:column>
                                     <b:column medium-screen="3">
-                                        <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="label"/> 
+                                        <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="name"/> 
                                     </b:column>
                                     <b:column medium-screen="3">
-                                        <b:message for="label" />
+                                        <b:message for="name" />
                                     </b:column>
                                 </b:row>
                                 <b:row styleClass="show-grid">

@@ -10,7 +10,9 @@ import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 public class GameSystemException extends AppBaseException {
 
     static final public String KEY_DB_CONSTRAINT = "error.db.constraint.uniq.name";
-    static final public String KEY_OPTIMISTIC_LOCK = "error.gameSystem.optimisticlock";
+    static final public String KEY_GAME_SYSTEM_OPTIMISTIC_LOCK = "error.gameSystem.optimisticlock";
+    static final public String KEY_GAME_SYSTEM_NOT_FOUND ="error.gameSystem.notFound";
+    static final public String KEY_GAME_SYSTEM_ALREADY_CHANGED ="error.gameSystem.alreadyChanged";
 
     private GameSystemException(String message) {
         super(message);
@@ -31,7 +33,7 @@ public class GameSystemException extends AppBaseException {
     }
     
     static public GameSystemException createGameSystemWithOptimisticLockKey(GameSystem gameSystem, OptimisticLockException cause) {
-        GameSystemException gse = new GameSystemException(KEY_OPTIMISTIC_LOCK, cause);
+        GameSystemException gse = new GameSystemException(KEY_GAME_SYSTEM_OPTIMISTIC_LOCK, cause);
         gse.setGameSystem(gameSystem);
         return gse;
     }
