@@ -4,7 +4,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:o="http://omnifaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 
     <body>
@@ -17,7 +16,7 @@
 
             <ui:define name="content">
                 <b:jumbotron>
-                    <h:form>
+                    <h:form id="createGameSystem">
                         <b:row styleClass="show-grid">
                             <b:column col-md="9">
                                 <b:row>
@@ -33,12 +32,12 @@
                                         <h:outputText value="${msg['systems.name']}*" /> 
                                     </b:column>
                                     <b:column medium-screen="3">
-                                        <b:inputText value="#{addGameSystemPageBean.gameSystemDTO.gameSystemName}" id="label">
+                                        <b:inputText value="#{addGameSystemPageBean.gameSystemDTO.gameSystemName}" id="name">
                                             
                                         </b:inputText>              
                                     </b:column>
                                     <b:column medium-screen="6">
-                                        <b:message for="label" />
+                                        <b:message for="name" />
                                     </b:column>
                                 </b:row>
                                 <b:row styleClass="show-grid">
@@ -47,6 +46,7 @@
                                     </b:column>    
                                     <b:column medium-screen="3">
                                         <b:commandButton action="#{addGameSystemPageBean.createGameSystem(true)}" value="${msg['action.confirm']}" update="@form" look="success" style="width:150px" id="confirm"/>
+                                        <br></br>
                                         <b:message for="confirm" />
                                     </b:column>
                                 </b:row>    

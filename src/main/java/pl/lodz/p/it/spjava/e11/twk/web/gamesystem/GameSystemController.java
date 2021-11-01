@@ -50,7 +50,7 @@ public class GameSystemController implements Serializable {
             return "goToSystems";
         } catch (GameSystemException gse) {
             if (GameSystemException.KEY_DB_CONSTRAINT.equals(gse.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, GameSystemException.KEY_DB_CONSTRAINT); 
+                ContextUtils.emitInternationalizedMessage("createGameSystem:name", GameSystemException.KEY_DB_CONSTRAINT); 
             } else {
                 Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku: ", gse);
             }

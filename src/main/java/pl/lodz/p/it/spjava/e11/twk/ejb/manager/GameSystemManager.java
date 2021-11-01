@@ -17,6 +17,7 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
+import pl.lodz.p.it.spjava.e11.twk.exception.GameSystemException;
 import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 
 
@@ -34,7 +35,7 @@ public class GameSystemManager extends AbstractManager implements SessionSynchro
     private GameSystemFacade gameSystemFacade;
     
     @RolesAllowed({"Administrator"})
-    public void createGameSystem (GameSystem gameSystem)throws AppBaseException,EJBException {
+    public void createGameSystem (GameSystem gameSystem)throws AppBaseException{
         gameSystemFacade.create(gameSystem);
     }
     

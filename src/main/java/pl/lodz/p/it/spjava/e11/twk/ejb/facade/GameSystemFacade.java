@@ -12,6 +12,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.e11.twk.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
@@ -47,9 +48,19 @@ public class GameSystemFacade extends AbstractFacade<GameSystem> {
         try{
             super.create(entity); //To change body of generated methods, choose Tools | Templates.
             em.flush();
-        } catch ( Exception ex){
+        } catch ( PersistenceException|DatabaseException ex){
             final Throwable cause = ex.getCause();
-            if (cause instanceof DatabaseException && cause.getMessage().contains(DB_UNIQUE_CONSTRAINT_FOR_GAME_SYSTEM_NAME)) throw GameSystemException.createWithDbCheckConstraintKey(entity, cause);
+            final Throwable causeCause = ex.getCause().getCause();
+            System.out.println("-----------------------GAME SYSTEM facade------------------------");
+            System.out.println("cause "+cause);
+            System.out.println("cause "+cause.getMessage());
+            System.out.println("causeCause "+causeCause);
+            System.out.println("causeCause "+causeCause.getMessage());
+            
+            if (cause instanceof DatabaseException
+                    && causeCause.getMessage().contains(DB_UNIQUE_CONSTRAINT_FOR_GAME_SYSTEM_NAME)){ 
+                throw GameSystemException.createWithDbCheckConstraintKey(entity, cause);
+            }
         }
     }
     
