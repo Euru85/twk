@@ -20,8 +20,7 @@ import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 @RequestScoped
 public class EditGameSystemPagePean {
     
-    @EJB
-    private GameSystemEndpoint gameSystemEndpoint;
+
     private GameSystemDTO gameSystemDTO;
     
     @Inject
@@ -36,7 +35,7 @@ public class EditGameSystemPagePean {
     }
     
     public String saveGameSystem(boolean decision)throws AppBaseException{
-        if (decision) gameSystemController.editGameSystem(gameSystemDTO);
+        if (decision) return gameSystemController.editGameSystem(gameSystemDTO);
         return "goToSystems";
     }
     

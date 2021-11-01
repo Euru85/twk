@@ -40,14 +40,12 @@ public class GameSystemManager extends AbstractManager implements SessionSynchro
     }
     
     @RolesAllowed({"Administrator"})
-    public void editGameSystem (Long id)throws AppBaseException {
-        GameSystem gameSystem = gameSystemFacade.find(id);
+    public void editGameSystem (GameSystem gameSystem)throws AppBaseException {
         gameSystemFacade.edit(gameSystem);
     }
     
     @RolesAllowed({"Administrator"})
-    public void deleteGameSystem(Long id)throws AppBaseException {
-        GameSystem gameSystem = gameSystemFacade.find(id);
+    public void deleteGameSystem(GameSystem gameSystem)throws AppBaseException {
         gameSystemFacade.remove(gameSystem);
     }
 }

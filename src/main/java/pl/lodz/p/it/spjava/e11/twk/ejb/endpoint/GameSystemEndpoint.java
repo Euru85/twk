@@ -47,6 +47,9 @@ public class GameSystemEndpoint {
     
     GameSystem gameSystem;
     
+    private GameSystem gameSystemEdit;
+    private GameSystem gameSystemDelete;
+    
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;
 
@@ -64,13 +67,13 @@ public class GameSystemEndpoint {
     @RolesAllowed({"Administrator"})
     @TransactionAttribute(TransactionAttributeType.NEVER)
     public void deleteGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
-       
+        gameSystemDelete = gameSystemFacade.find(gameSystemDTO.getId());
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
 
         do {
             try {   
-                gameSystemManager.deleteGameSystem(gameSystemDTO.getId());
+                gameSystemManager.deleteGameSystem(gameSystemDelete);
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
             } catch(GameSystemException gse){
                 throw gse;
@@ -90,8 +93,8 @@ public class GameSystemEndpoint {
     
     @RolesAllowed({"Administrator"})
     public void editGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
-        gameSystem=gameSystemFacade.find(gameSystemDTO.getId());
-        gameSystem.setSystemName(gameSystemDTO.getGameSystemName());
+        gameSystemEdit=gameSystemFacade.find(gameSystemDTO.getId());
+        gameSystemEdit.setSystemName(gameSystemDTO.getGameSystemName());
         
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
@@ -99,7 +102,7 @@ public class GameSystemEndpoint {
             do {
                 try {
      
-                gameSystemManager.editGameSystem(gameSystem.getId());
+                gameSystemManager.editGameSystem(gameSystemEdit);
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
                 } catch(GameSystemException gse){
                     throw gse;

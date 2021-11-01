@@ -36,7 +36,7 @@ public class DeleteGameSystemPagePean {
     }
     
     public String deleteGameSystem(boolean decision)throws AppBaseException{
-        if (decision)gameSystemController.deleteGameSystem(gameSystemDTO);
+        if (decision)return gameSystemController.deleteGameSystem(gameSystemDTO);
         return "goToSystems";
     }
     

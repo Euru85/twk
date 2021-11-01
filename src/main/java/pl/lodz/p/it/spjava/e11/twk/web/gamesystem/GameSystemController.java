@@ -58,7 +58,7 @@ public class GameSystemController implements Serializable {
         } catch (AppBaseException abe) {
             Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji createGameSystem wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+                ContextUtils.emitInternationalizedMessage("createGameSystem:confirm", abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
             }
             return null;
         }
@@ -70,6 +70,8 @@ public class GameSystemController implements Serializable {
             return "goToSystems";
         } catch (GameSystemException gse) {
             if (GameSystemException.KEY_DB_CONSTRAINT.equals(gse.getMessage())) {
+                System.out.println("-------------------------unique--------------------");
+                System.out.println("key " + GameSystemException.KEY_DB_CONSTRAINT);
                 ContextUtils.emitInternationalizedMessage("editGameSystem:name", GameSystemException.KEY_DB_CONSTRAINT); 
             } else {
                 Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji editGameSystem wyjatku: ", gse);
@@ -78,7 +80,7 @@ public class GameSystemController implements Serializable {
         } catch (AppBaseException abe) {
             Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji editGameSystem wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+                ContextUtils.emitInternationalizedMessage("editGameSystem:confirm", abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
             }
             return null;
         }
@@ -104,7 +106,7 @@ public class GameSystemController implements Serializable {
             Logger.getLogger(GameSystemController.class.getName()).log(Level.SEVERE,
                     "Zgłoszenie w metodzie akcji deleteGameSystem wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+                ContextUtils.emitInternationalizedMessage("deleteGameSystem:confirm", abe.getMessage());
             }
             return null;
         }
