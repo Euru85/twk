@@ -85,11 +85,6 @@
             <redirect />
         </navigation-case>   
         <navigation-case>
-            <from-outcome>goToLeagueDetails</from-outcome>
-            <to-view-id>/league/leagueDetails.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-        <navigation-case>
             <from-outcome>goToTournaments</from-outcome>
             <to-view-id>/tournament/tournaments.xhtml</to-view-id>
             <redirect />
@@ -122,6 +117,31 @@
         <navigation-case>
             <from-outcome>goToAddNewSystem</from-outcome>
             <to-view-id>/systems/add.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>goToSystemDetails</from-outcome>
+            <to-view-id>/systems/details.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+                <navigation-case>
+            <from-outcome>goToEditLeague</from-outcome>
+            <to-view-id>/league/edit.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToDeleteLeague</from-outcome>
+            <to-view-id>/league/delete.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToAddNewLeague</from-outcome>
+            <to-view-id>/league/add.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>goToLeagueDetails</from-outcome>
+            <to-view-id>/league/details.xhtml</to-view-id>
             <redirect />
         </navigation-case>                               
     </navigation-rule>

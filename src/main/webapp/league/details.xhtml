@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.league']}: ${showLeagueDetailsPageBean.leagueDTO.leagueName}
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <h:form>
+                        <b:row>
+                            <b:column medium-screen="3">
+                                <h:outputText value="${msg['menu.players']}" style="font-size: 30px"/> 
+                                <br></br>
+                            </b:column>
+                        </b:row> 
+                        <b:row>
+                            <b:column medium-screen="3">
+                                <h:outputText value="${msg['menu.tournaments']}" style="font-size: 30px" /> 
+                                <br></br>
+                            </b:column>
+                        </b:row>                     
+                        <b:dataTable var="row" value="#{showLeagueDetailsPageBean.listTournamentsDTO()}" fixedHeader="true" >
+                            <b:dataTableColumn label="${msg['general.name']} ">
+                                <b:commandButton action="#" look="link" value="#{row.tournamentName}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.game_system']} ">
+                                <b:commandButton action="#{listGameSystemPageBean.showGameSystemDetailsAction(row.gameSystemId)}" look="link" value="#{row.gameSystemId.systemName}" /> 
+                            </b:dataTableColumn>
+                        </b:dataTable> 
+                    </h:form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

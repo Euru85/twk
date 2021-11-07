@@ -36,6 +36,16 @@ public class ListLeaguePageBean {
         this.listLeagueDTO = listtLeagueDTO;
     }
     
+    public String editLeagueAction(LeagueDTO leagueDTO){
+        leagueController.setSelectedLeagueDTO(leagueDTO);
+        return "goToEditLeague";
+    }
+    
+    public String deleteLeagueAction(LeagueDTO leagueDTO){
+        leagueController.setSelectedLeagueDTO(leagueDTO);
+        return "goToDeleteLeague";
+    }
+    
     public String showLeagueDetailsAction(LeagueDTO leagueDTO){
         leagueController.setSelectedLeagueDTO(leagueDTO);
         return "goToLeagueDetails";

@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.ejb.manager;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -31,10 +32,17 @@ public class LeagueManager extends AbstractManager implements SessionSynchroniza
     @Inject
     private LeagueFacade leagueFacade;
     
+    @RolesAllowed({"Administrator"})
     public void createLeague (League league)throws AppBaseException {
         leagueFacade.create(league);
     }
     
+    @RolesAllowed({"Administrator"})
+    public void editLeague (League league)throws AppBaseException {
+        leagueFacade.edit(league);
+    }
+    
+    @RolesAllowed({"Administrator"})
     public void deleteLeague(League league)throws AppBaseException {
         leagueFacade.remove(league);
     }

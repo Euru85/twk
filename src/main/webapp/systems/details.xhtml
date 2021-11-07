@@ -11,23 +11,23 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.league']}: ${showLeagueDetailsPageBean.leagueDTO.leagueName}
+                ${msg['menu.system']}: ${showGameSystemDetailsPageBean.gameSystemDTO.gameSystemName}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
-                        <b:dataTable var="row" value="#{showLeagueDetailsPageBean.listTournamentsDTO()}" fixedHeader="true" >
-                            <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
-                            </b:dataTableColumn>
+                        <b:row>
+                            <b:column medium-screen="3">
+                                <h:outputText value="${msg['menu.leagues']}" style="font-size: 30px" /> 
+                                <br></br>
+                            </b:column>
+                        </b:row>                     
+                        <b:dataTable var="row" value="#{showGameSystemDetailsPageBean.listLeaguesDTO()}" fixedHeader="true" >
                             <b:dataTableColumn label="${msg['general.name']} ">
-                                <b:commandButton action="#" look="link" value="#{row.tournamentName}" /> 
+                                <b:commandButton action="#{listLeaguePageBean.showLeagueDetailsAction(row)}" look="link" value="#{row.leagueName}" /> 
                             </b:dataTableColumn>
-                            <b:dataTableColumn label="${msg['general.game_system']} ">
-                                <b:commandButton action="#" look="link" value="#{row.gameSystemId.systemName}" /> 
-                            </b:dataTableColumn>
-                        </b:dataTable>
+                        </b:dataTable> 
                     </h:form>
                 </b:jumbotron>
             </ui:define>

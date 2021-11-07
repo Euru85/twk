@@ -11,12 +11,12 @@
         <ui:composition template="../templates/twkTemplate.xhtml">
             
             <ui:define name="title">
-                ${msg['menu.system']} ${editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}
+                ${msg['menu.system']} ${editLeaguePageBean.getLeagueDTO().getLeagueName()}
             </ui:define>
 
             <ui:define name="content">
                 <b:jumbotron>
-                    <h:form id="editGameSystem">
+                    <h:form id="editLeague">
                         <b:row styleClass="show-grid">
                             <b:column col-md="9">
                                 <b:row>
@@ -32,24 +32,40 @@
                                 </b:row>
                                 <b:row>
                                     <b:column large-screen="3">
-                                        <h:outputText value="${msg['systems.name']}" /> 
+                                        <h:outputText value="${msg['league.name']}*" /> 
                                     </b:column>
                                     <b:column large-screen="3">
-                                        <h:outputText value="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}" /> 
+                                        <h:outputText value="#{editLeaguePageBean.getLeagueDTO().getLeagueName()}" /> 
                                     </b:column>
                                     <b:column large-screen="3">
-                                        <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="name"/> 
+                                        <b:inputText placeholder="#{editLeaguePageBean.getLeagueDTO().getLeagueName()}"  value="#{editLeaguePageBean.gameSystemDTO.gameSystemName}" id="name"/> 
                                     </b:column>
                                     <b:column large-screen="3">
                                         <b:message for="name" />
                                     </b:column>
                                 </b:row>
+                                <b:row>
+                                    <b:column medium-screen="3">
+                                        <h:outputText value="${msg['systems.name']}*" /> 
+                                    </b:column>
+                                    <b:column medium-screen="3">
+                                        <h:outputText value="#{editLeaguePageBean.leagueDTO.gameSystemId.systemName}" /> 
+                                    </b:column>
+                                    <b:column medium-screen="3">
+                                        <b:selectOneMenu id="systemName" value="#{editLeaguePageBean.gameSystemDTO}">
+                                            <f:selectItems  value="#{editLeaguePageBean.listGameSystemDTO}" var="gameSystemDTO" itemValue="#{gameSystemDTO}" itemLabel="#{gameSystemDTO.gameSystemName}" />
+                                        </b:selectOneMenu><br/>           
+                                    </b:column>
+                                    <b:column medium-screen="6">
+                                        <b:message for="systemName" />
+                                    </b:column>
+                                </b:row>
                                 <b:row styleClass="show-grid">
                                     <b:column large-screen="3">
-                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(false)}"  value="${msg['action.cancel']}" immediate="true" update="@none" look="danger" style="width:150px"/>
+                                        <b:commandButton action="#{editLeaguePageBean.saveLeague(false)}"  value="${msg['action.cancel']}" immediate="true" update="@none" look="danger" style="width:150px"/>
                                     </b:column>
                                     <b:column large-screen="6">
-                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(true)}" value="${msg['action.confirm']}"  id="confirm" update="@form" look="success" style="width:150px"/>
+                                        <b:commandButton action="#{editLeaguePageBean.saveLeague(true)}" value="${msg['action.confirm']}"  id="confirm" update="@form" look="success" style="width:150px"/>
                                         <br></br>
                                         <b:message for="confirm" />
                                     </b:column>

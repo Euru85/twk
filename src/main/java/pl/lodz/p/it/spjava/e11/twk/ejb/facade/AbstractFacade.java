@@ -14,6 +14,9 @@ import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
  * @author Adam
  */
 public abstract class AbstractFacade<T> {
+    
+    public static final String DB_UNIQUE_CONSTRAINT_FOR_GAME_SYSTEM_NAME = "SQL210823204352190";
+    public static final String DB_UNIQUE_CONSTRAINT_FOR_LEAGUE_NAME = "SQL210823204352080"; 
 
     private Class<T> entityClass;
 

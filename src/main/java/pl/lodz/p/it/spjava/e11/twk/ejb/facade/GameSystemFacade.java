@@ -30,7 +30,7 @@ import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class GameSystemFacade extends AbstractFacade<GameSystem> {
     
-    private static final String DB_UNIQUE_CONSTRAINT_FOR_GAME_SYSTEM_NAME = "SQL210823204352190";
+    //private static final String DB_UNIQUE_CONSTRAINT_FOR_GAME_SYSTEM_NAME = "SQL210823204352190";
 
     @PersistenceContext(unitName = "pl.lodz.p.it.spjava.e11_TabletopWargamesKeeperPU")
     private EntityManager em;

@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint;
+import pl.lodz.p.it.spjava.e11.twk.model.GameSystem;
 
 
 
@@ -46,6 +47,18 @@ public class ListGameSystemPageBean {
     public String createGameSystemAction(){
         return "goToAddGameSystem";
     }
+    
+    public String showGameSystemDetailsAction(GameSystemDTO gameSystemDTO){
+        gameSystemController.setSelectedGameSystemDTO(gameSystemDTO);
+        return "goToSystemDetails";
+    }
+    
+    public String showGameSystemDetailsAction(GameSystem gameSystem){
+        gameSystemController.setSelectedGameSystemDTO(new GameSystemDTO(gameSystem.getId(), gameSystem.getSystemName(),gameSystem.getTournamentList(),gameSystem.getLeagueList()));
+        return "goToSystemDetails";
+    }
+    
+    
     
     @PostConstruct
     private void init(){

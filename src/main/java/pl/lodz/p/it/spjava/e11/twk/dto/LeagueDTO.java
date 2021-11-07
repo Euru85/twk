@@ -64,6 +64,9 @@ public class LeagueDTO {
         this.tournamentList = tournamentList;
     }
     
-    
+    public boolean isRemovable(){
+        if (!getTournamentList().isEmpty()) return false;
+        return getTournamentList().isEmpty();
+    }
     
 }

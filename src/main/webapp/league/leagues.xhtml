@@ -17,15 +17,23 @@
             <ui:define name="content">
                 <b:jumbotron>
                     <h:form>
+                        <b:well rendered="#{request.isUserInRole('Administrator')}">
+                            <b:commandButton action="goToAddNewLeague" value="${msg['league.new']}" look="success">
+                        </b:commandButton></b:well>
                         <b:dataTable var="row" value="#{listLeaguePageBean.getListLeagueDTO()}" fixedHeader="true" >
-                            <b:dataTableColumn label="#" content-style="link">
-                                 <b:commandButton action="#" look="link" value="#{row.id}" /> 
-                            </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.name']} ">
                                 <b:commandButton action="#{listLeaguePageBean.showLeagueDetailsAction(row)}" look="link" value="#{row.leagueName}" /> 
                             </b:dataTableColumn>
                             <b:dataTableColumn label="${msg['general.game_system']} ">
-                                <b:commandButton action="#" look="link" value="#{row.gameSystemId.systemName}" /> 
+                                <b:commandButton action="#{listGameSystemPageBean.showGameSystemDetailsAction(row.gameSystemId)}" look="link" value="#{row.gameSystemId.systemName}" /> 
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="${msg['general.actions']}" rendered="#{request.isUserInRole('Administrator')}">
+                               <b:commandButton action="#{listLeaguePageBean.editLeagueAction(row)}" look="link">
+                                    <b:iconAwesome name="cog" tooltip="${msg['action.edit']}"/> ${msg['action.edit']}
+                                </b:commandButton>
+                                <b:commandButton action="#{listLeaguePageBean.deleteLeagueAction(row)}" look="link" rendered="#{row.removable}">
+                                     <b:iconAwesome name="remove" tooltip="${msg['action.delete']}" rendered="#{row.removable}"/> ${msg['action.delete']}
+                                </b:commandButton>
                             </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
