@@ -6,6 +6,7 @@
 package pl.lodz.p.it.spjava.e11.twk.web.league;
 
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,14 +18,13 @@ import pl.lodz.p.it.spjava.e11.twk.dto.LeagueDTO;
 import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint;
 import pl.lodz.p.it.spjava.e11.twk.ejb.facade.GameSystemFacade;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
-import pl.lodz.p.it.spjava.e11.twk.web.gamesystem.GameSystemController;
 
 
 
 
 @Named(value = "editLeaguePageBean")
 @RequestScoped
-public class EditLeaguePagePean {
+public class EditLeaguePagePean{
     
 
     private LeagueDTO leagueDTO;

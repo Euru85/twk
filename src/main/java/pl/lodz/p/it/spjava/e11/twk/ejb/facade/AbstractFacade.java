@@ -37,6 +37,10 @@ public abstract class AbstractFacade<T> {
     public void remove(T entity)throws AppBaseException {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
+    
+    public void refresh(T entity) {
+        getEntityManager().refresh(entity);
+    }
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);

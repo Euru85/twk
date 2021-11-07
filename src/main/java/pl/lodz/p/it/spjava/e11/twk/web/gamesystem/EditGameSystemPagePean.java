@@ -5,13 +5,10 @@
  */
 package pl.lodz.p.it.spjava.e11.twk.web.gamesystem;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import pl.lodz.p.it.spjava.e11.twk.dto.GameSystemDTO;
-import pl.lodz.p.it.spjava.e11.twk.ejb.endpoint.GameSystemEndpoint;
 import pl.lodz.p.it.spjava.e11.twk.exception.AppBaseException;
 
 

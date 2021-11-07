@@ -30,6 +30,7 @@ public class GameSystemController implements Serializable {
     
     private GameSystemDTO selectedGameSystemDTO;
     private GameSystemDTO createGameSystemDTO;
+    private GameSystemDTO editGameSystemDTO;
 
     public GameSystemDTO getSelectedGameSystemDTO() {
         return selectedGameSystemDTO;
@@ -66,7 +67,9 @@ public class GameSystemController implements Serializable {
     
     public String editGameSystem(GameSystemDTO gameSystemDTO) {
         try {
-            gameSystemEndpoint.editGameSystem(gameSystemDTO);
+            editGameSystemDTO = gameSystemDTO;
+            gameSystemEndpoint.editGameSystem(editGameSystemDTO);
+            editGameSystemDTO  = null;
             return "goToSystems";
         } catch (GameSystemException gse) {
             if (GameSystemException.KEY_DB_CONSTRAINT.equals(gse.getMessage())) {

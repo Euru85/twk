@@ -101,6 +101,7 @@ public class LeagueEndpoint {
     @RolesAllowed({"Administrator"})
     public void editLeague(LeagueDTO leagueDTO, GameSystemDTO gameSystemDTO) throws AppBaseException {
         leagueEdit=leagueFacade.find(leagueDTO.getId());
+        leagueFacade.refresh(leagueEdit);
         leagueEdit.setLeagueName(leagueDTO.getLeagueName());
         leagueEdit.setGameSystemId(gameSystemFacade.find(gameSystemDTO.getId()));
         System.out.println("++++++++++++++++++++++++SYSTEM NAME PRZY EDICIE++++++++++++++++");
@@ -113,6 +114,8 @@ public class LeagueEndpoint {
                 try {
      
                 leagueManager.editLeague(leagueEdit);
+                leagueFacade.refresh(leagueEdit);
+                leagueEdit=null;
                 rollbackTX = leagueManager.isLastTransactionRollback();
                 } catch(LeagueException le){
                     throw le;

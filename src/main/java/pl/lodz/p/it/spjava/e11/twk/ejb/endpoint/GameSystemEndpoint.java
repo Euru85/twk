@@ -93,9 +93,9 @@ public class GameSystemEndpoint {
     
     @RolesAllowed({"Administrator"})
     public void editGameSystem(GameSystemDTO gameSystemDTO) throws AppBaseException {
-        gameSystemEdit=gameSystemFacade.find(gameSystemDTO.getId());
+        gameSystemEdit=gameSystemFacade.find(gameSystemDTO.getId()); 
+        gameSystemFacade.refresh(gameSystemEdit);
         gameSystemEdit.setSystemName(gameSystemDTO.getGameSystemName());
-        
         boolean rollbackTX;
         int retryTXCounter = txRetryLimit;
         try{
@@ -103,6 +103,8 @@ public class GameSystemEndpoint {
                 try {
      
                 gameSystemManager.editGameSystem(gameSystemEdit);
+                gameSystemFacade.refresh(gameSystemEdit);
+                gameSystemEdit=null;
                 rollbackTX = gameSystemManager.isLastTransactionRollback();
                 } catch(GameSystemException gse){
                     throw gse;
@@ -120,7 +122,6 @@ public class GameSystemEndpoint {
         if (rollbackTX && retryTXCounter == 0) {
             throw GameSystemException.createGameSystemExceptionWithTxRetryRollback();
         }
-       gameSystem=null;
     }
     
     @RolesAllowed({"Administrator"})
