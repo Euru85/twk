@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <body>
+
+        <ui:composition template="../templates/twkTemplate.xhtml">
+            
+            <ui:define name="title">
+                ${msg['menu.system']} ${editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}
+            </ui:define>
+
+            <ui:define name="content">
+                <b:jumbotron>
+                    <h:form id="editGameSystem">
+                        <b:row styleClass="show-grid">
+                            <b:column col-md="9">
+                                <b:row>
+                                    <b:column large-screen="3">
+                                        <h:outputText value="${msg['general.name']}" /> 
+                                    </b:column>
+                                    <b:column large-screen="3">
+                                        <h:outputText value="${msg['general.current.value']}" />
+                                    </b:column>
+                                    <b:column large-screen="3">
+                                        <h:outputText value="${msg['general.new.value']}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column large-screen="3">
+                                        <h:outputText value="${msg['systems.name']}" /> 
+                                    </b:column>
+                                    <b:column large-screen="3">
+                                        <h:outputText value="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}" /> 
+                                    </b:column>
+                                    <b:column large-screen="3">
+                                        <b:inputText placeholder="#{editGameSystemPageBean.getGameSystemDTO().getGameSystemName()}"  value="#{editGameSystemPageBean.gameSystemDTO.gameSystemName}" id="name"/> 
+                                    </b:column>
+                                    <b:column large-screen="3">
+                                        <b:message for="name" />
+                                    </b:column>
+                                </b:row>
+                                <b:row styleClass="show-grid">
+                                    <b:column large-screen="3">
+                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(false)}"  value="${msg['action.cancel']}" immediate="true" update="@none" look="danger" style="width:150px"/>
+                                    </b:column>
+                                    <b:column large-screen="6">
+                                        <b:commandButton action="#{editGameSystemPageBean.saveGameSystem(true)}" value="${msg['action.confirm']}"  id="confirm" update="@form" look="success" style="width:150px"/>
+                                        <br></br>
+                                        <b:message for="confirm" />
+                                    </b:column>
+                                </b:row>    
+                            </b:column>
+                        </b:row>
+                    </h:form>
+                </b:jumbotron>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
